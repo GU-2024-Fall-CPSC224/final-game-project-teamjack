@@ -15,13 +15,14 @@ package edu.gonzaga;
 
 /** Main program class for launching your team's program. */
 public class MainGame {
+    static Card newCard = new Card();
     public static void main(String[] args) {
         System.out.println("Hello Team Game");
-
+        newCard.print();
 
         // Your code here. Good luck!
 
         // Attempting a commit and push
-        
+
     }
 }
