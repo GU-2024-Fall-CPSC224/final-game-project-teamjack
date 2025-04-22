@@ -5,6 +5,6 @@ public class Spade extends Suit
 {
     public Spade()
     {
-        super("S");
+        super("Spades");
     }
 }

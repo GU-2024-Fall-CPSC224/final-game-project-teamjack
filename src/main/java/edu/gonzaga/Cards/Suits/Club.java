@@ -5,6 +5,6 @@ public class Club extends Suit
 {
     public Club()
     {
-        super("C");
+        super("Clubs");
     }
 }

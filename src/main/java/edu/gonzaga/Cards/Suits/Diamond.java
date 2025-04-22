@@ -5,6 +5,6 @@ public class Diamond extends Suit
 {
     public Diamond()
     {
-        super("D");
+        super("Diamonds");
     }
 }

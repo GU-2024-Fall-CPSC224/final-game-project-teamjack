@@ -6,27 +6,38 @@ import java.util.ArrayList;
 
 public class Collection 
 {
-    private ArrayList<Card> cardCollection;
+    private ArrayList<Card> list;
+
+    public Collection()
+    {
+        list = new ArrayList<Card>();
+    }
+
+    ArrayList<Card> getList()
+        {return list;}
 
     public void addCard(Card card){
-        cardCollection.add(card);
+        list.add(card);
     }
     public void addCard(int index){
         
     }
     public void remCard(Card card){
-        cardCollection.remove(card);
+        list.remove(card);
     }
     public void remCard(int index){
-        cardCollection.remove(index);
+        list.remove(index);
     }
-    public Card getCard(int index){
-        return cardCollection.get(index);
-    }
+    public Card getCard(int index)
+        {return list.get(index);}
+
+    public Card pop()
+        {return getCard(0);}
+
     public void print(){
         Card newCard = new Card();
 
-        for(int i = 0; i < cardCollection.size(); ++i){
+        for(int i = 0; i < list.size(); ++i){
             newCard = getCard(i);
             newCard.print();
         }

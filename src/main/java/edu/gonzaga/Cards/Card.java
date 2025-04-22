@@ -7,12 +7,25 @@ public class Card
     private int value;      // Hold the value of the card (ALL FACES 10 ACE 1 or 10) (score/win handling)
     private String cardType; // What the actual card is even if it does not matter for the game (output handling)
 
-    // Card constructor (Creates a random card)    
+    // Card constructor for a random card
     public Card()
     {
         // Generate random number 1 thorugh 4 for a random suit
         int suitt = (int)(Math.random() * 4) + 1;
-        switch(suitt){
+        Integer cardType = (int)(Math.random() * 13) + 1;
+        setCard(cardType, suitt);
+    }
+
+    // Card constructor for a specific type of card
+    public Card(Integer cardType, int suitt)
+    {
+        setCard(cardType, suitt);
+    }
+
+    private void setCard(Integer cardType, int suitt)
+    {
+        switch(suitt)
+        {
             case 1:
                 suit = new Heart();
                 break;
@@ -30,12 +43,16 @@ public class Card
                 //System.out.println("Invalid number for identifying suit");
         }
         // Generate randome number 1 thorugh 13 for random card Ace to King
-        Integer cardType = (int)(Math.random() * 13) + 1;
-        if(cardType >= 2 && cardType <= 10){
+        
+        if(cardType >= 2 && cardType <= 10)
+        {
             this.cardType = cardType.toString();
             value = cardType;
-        }else{
-            switch(cardType){
+        }
+        else
+        {
+            switch(cardType)
+            {
                 case 1:
                     // Ace so value can be either 1 or 10
                     this.cardType = "Ace";
@@ -54,6 +71,7 @@ public class Card
                     break;
             }
         }
+
     }
     public int getValue(){
         return value;
@@ -74,7 +92,10 @@ public class Card
         this.value = value;
     }
     public void print(){
-        System.out.println(cardType + " " + suit.getName());
+        System.out.println(cardType + " of " + suit.getName());
+    }
+    public String getString(){
+        return (cardType + " of " + suit.getName());
     }
 }
 

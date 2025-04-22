@@ -5,6 +5,6 @@ public class Heart extends Suit
 {
     public Heart()
     {
-        super("H");
+        super("Hearts");
     }
 }
