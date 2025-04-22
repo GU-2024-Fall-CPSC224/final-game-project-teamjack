@@ -32,7 +32,11 @@ public class Collection
         {return list.get(index);}
 
     public Card pop()
-        {return getCard(0);}
+    {
+        Card tmp = getCard(0);
+        remCard(0);
+        return tmp;
+    }
 
     public void print(){
         Card newCard = new Card();

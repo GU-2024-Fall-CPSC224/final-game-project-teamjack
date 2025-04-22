@@ -40,7 +40,7 @@ public class BlackJack
     public void prepare()
     {
 
-        party = new Party(1);
+        party = new Party(2);
         party.displayAllScores();
     }
 
