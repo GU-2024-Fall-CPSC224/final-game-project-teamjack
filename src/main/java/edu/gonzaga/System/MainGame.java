@@ -12,11 +12,15 @@
  */
 package edu.gonzaga;
 
+import edu.gonzaga.Cards.*;
+
 
 /** Main program class for launching your team's program. */
-public class MainGame {
+public class MainGame 
+{
     static Card newCard = new Card();
-    public static void main(String[] args) {
+    public static void main(String[] args) 
+    {
         System.out.println("Hello Team Game");
         newCard.print();
 

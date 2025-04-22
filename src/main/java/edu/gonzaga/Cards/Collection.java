@@ -1,10 +1,11 @@
-package edu.gonzaga.Collections;
+package edu.gonzaga.Cards;
 // Class will essentialy just be a collection of cards for using
 // When creating a deck of cards or a hand for the player
 import java.util.ArrayList;
 
 
-public class Collection {
+public class Collection 
+{
     private ArrayList<Card> cardCollection;
 
     public void addCard(Card card){

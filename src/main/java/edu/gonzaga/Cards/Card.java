@@ -1,13 +1,15 @@
-package edu.gonzaga.Collections;
+package edu.gonzaga.Cards;
+import edu.gonzaga.Cards.Suits.*;
 
-
-public class Card{
+public class Card
+{
     private Suit suit;      
     private int value;      // Hold the value of the card (ALL FACES 10 ACE 1 or 10) (score/win handling)
     private String cardType; // What the actual card is even if it does not matter for the game (output handling)
 
-    // Card constructor (Creates a random card)
-    Card(){
+    // Card constructor (Creates a random card)    
+    public Card()
+    {
         // Generate random number 1 thorugh 4 for a random suit
         int suitt = (int)(Math.random() * 4) + 1;
         switch(suitt){
