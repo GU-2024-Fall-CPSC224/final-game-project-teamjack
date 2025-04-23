@@ -1,13 +1,14 @@
 package edu.gonzaga.Users;
 
 import edu.gonzaga.Cards.Hand;
+import edu.gonzaga.Game.Interface;
 
 import java.util.Scanner;
 /*
  * NOTE:
  * Feel free to change and adjust anything that would make it more efficient, clean or generally better!
  * Or make any comments that suggest changes as well!
- * Red scribbles due to every other class still a work in progress.
+ * Red scribbles will be dealt with.
  */
 public class Bet{
     
@@ -18,10 +19,10 @@ public class Bet{
     private Player currentPlayer = new Player();
 
     //Current Bet amount, default is set to 0
-    private double betAmount;
+    private int betAmount;
 
     //Minimum a Player should be able to bet.
-    private double minBet;
+    private int minBet;
 
     //Default constructor
     public Bet(){
@@ -33,35 +34,35 @@ public class Bet{
 
 
     //Method to that allows user to place a Bet, this will also check for any invalid inputs.
-    public double placeBet(Player CurrentPlayer){
+    public int placeBet(Player CurrentPlayer){
 
         //if statement to check if the Player's balance is valid.
-
-        //assuming we're passing by an object, the Player Object has a getBalance method.
-        if(currentPlayer.getBalance()>minBet){
+        if(currentPlayer.getCurrency()>minBet){
 
             //Bet options that user can be able to set: 5, 10, 100, and 500.
             System.out.println("Place a bet!");
-            System.out.println("5");
-            System.out.println("10");
-            System.out.println("100");
-            System.out.println("500");
-            Scanner input = new Scanner(System.in);
+            System.out.println("A: 5");
+            System.out.println("B: 10");
+            System.out.println("C: 100");
+            System.out.println("D: 500");
+            
+            String input = Interface.promptUser();
 
             //Bet options will be placed via a range of chars of A-D
-            double betChoice = input.nextDouble();
+            char betChoice = input.charAt(0);
+
 
             //this is the actual betting feature
-            if(betChoice == 5){
+            if(betChoice == 'A'){
 
                 System.out.println("5 Works");
 
                 //Assuming we're working with an object.
-                if(currentPlayer.getBalance()>=minBet){
+                if(currentPlayer.getCurrency()>=minBet){
 
-                    //these operations WILL BE CHANGED to actually retrieve the values.
-                    double changedBalance = currentPlayer.getBalance() - minBet;
-                    currentPlayer.setBalance(changedBalance);
+                 
+                    int changedBalance = currentPlayer.getCurrency() - minBet;
+                    currentPlayer.setCurrency(changedBalance);
                     betAmount = 5;
                     return betAmount;
 
@@ -69,17 +70,17 @@ public class Bet{
                 }
 
             //similarity to above
-            }else if(betChoice == 10){
+            }else if(betChoice == 'B'){
                 //for debugging testing if it works
                 System.out.println("10 Works");
 
-                //Assuming we're working with an object. Making an if statement to check if the Player has enough for the valid Bet.
+                // Making an if statement to check if the Player has enough for the valid Bet.
                 //If not they will be given an error.
-                if(currentPlayer.getBalance()>=10){
+                if(currentPlayer.getCurrency()>=10){
                     
-                    //these operations WILL BE CHANGED to actually retrieve the values.
-                    double changedBalance = currentPlayer.getBalance() - 10;
-                    currentPlayer.setBalance(changedBalance);
+        
+                    int changedBalance = currentPlayer.getCurrency() - 10;
+                    currentPlayer.setCurrency(changedBalance);
                     betAmount = 10;
                     return betAmount;
 
@@ -91,16 +92,17 @@ public class Bet{
                     break;
                 }
 
-            }else if(betChoice == 100){
+            }else if(betChoice == 'C'){
                 
                 System.out.println("100 Works");
 
-                if(currentPlayer.getBalance()>=100){
+                if(currentPlayer.getCurrency()>=100){
     
-                    //these operations WILL BE CHANGED to actually retrieve the values.
-                    double changedBalance = currentPlayer.getBalance() - 100;
-                    currentPlayer.setBalance(changedBalance);
+                   
+                    int changedBalance = currentPlayer.getCurrency() - 100;
+                    currentPlayer.setCurrency(changedBalance);
                     betAmount = 100;
+
                     return betAmount;
 
 
@@ -111,19 +113,21 @@ public class Bet{
                     break;
                 }
                       
-            }else if(betChoice == 500){
-                System.out.println("500 Works")
+            }else if(betChoice == 'D'){
+                System.out.println("500 Works");
                 
-                //these operations WILL BE CHANGED to actually retrieve the values.
-                if(currentPlayer.getBalance()>=500){
-                    double changedBalance = currentPlayer.getBalance() - 100;
-                    currentPlayer.setBalance(changedBalance);
+              
+                if(currentPlayer.getCurrency()>=500){
+                    int changedBalance = currentPlayer.getCurrency() - 100;
+                    currentPlayer.setCurrency(changedBalance);
                     betAmount = 500;
                     return betAmount;
 
 
                 }
             }
+        }else if(currentPlayer.getCurrency()<minBet){
+            System.out.println("Not enough money.");
         }
     }
 
@@ -139,20 +143,20 @@ public class Bet{
             System.out.println("Winning Works");
             if(betAmount==5){
 
-                double changedBalance = currentPlayer.getBalance() + betAmount*2;
-                currentPlayer.setBalance(changedBalance)
+                int changedBalance = currentPlayer.getCurrency() + betAmount*2;
+                currentPlayer.setCurrency(changedBalance);
 
             }else if(betAmount == 10){
-                double changedBalance = currentPlayer.getBalance() + betAmount*2;
-                currentPlayer.setBalance(changedBalance)
+                int changedBalance = currentPlayer.getCurrency() + betAmount*2;
+                currentPlayer.setCurrency(changedBalance);
 
             }else if(betAmount == 100){
-                double changedBalance = currentPlayer.getBalance() + betAmount*2;
-                currentPlayer.setBalance(changedBalance)
+                int changedBalance = currentPlayer.getCurrency() + betAmount*2;
+                currentPlayer.setCurrency(changedBalance);
 
             }else if(betAmount==500){
-                double changedBalance = currentPlayer.getBalance() + betAmount*2;
-                currentPlayer.setBalance(changedBalance)
+                int changedBalance = currentPlayer.getCurrency() + betAmount*2;
+                currentPlayer.setCurrency(changedBalance);
 
             }
         }
@@ -163,12 +167,12 @@ public class Bet{
             double am = betAmount*1.5;
 
             //want our balance to stay as int.
-            double changedBalance = currentPlayer.getBalance() + betAmount + am;
-            currentPlayer.setBalance(changedBalance)
+            int changedBalance = currentPlayer.getCurrency() + betAmount + (int)(betAmount*1.75);
+            currentPlayer.setCurrency(changedBalance);
 
         }else if(currentHand.bust()){
             System.out.println("Losing Works");
-            //None changed here since we already adjusted the Player's Balance in the placeBet method.
+            //Nothing changed here since we already adjusted the Player's Balance in the placeBet method.
         }
 
     }
