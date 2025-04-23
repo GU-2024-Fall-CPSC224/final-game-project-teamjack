@@ -29,9 +29,10 @@ public class Bet{
     private int minBet;
 
     //Default constructor
-    public Bet(Player currentPlayer){
+    public Bet(Player currentPlayer, Hand currentHand){
 
         this.currentPlayer = currentPlayer;
+        this.currentHand = currentHand;
         betAmount = 0;
         minBet = 5;
 
@@ -174,10 +175,9 @@ public class Bet{
         //BlackJack winnings has a different multiplier.
         if(currentHand.hasBlackJack()){
             System.out.println("BlackJack Works");
-            double am = betAmount*1.5;
 
             //want our balance to stay as int.
-            int changedBalance = currentPlayer.getCurrency() + betAmount + (int)(betAmount*1.75);
+            int changedBalance = currentPlayer.getCurrency() + betAmount + (int)(betAmount*1.5);
             currentPlayer.setCurrency(changedBalance);
 
         }else if(currentHand.bust()){
