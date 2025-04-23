@@ -136,11 +136,11 @@ public class Bet{
         }
         return betAmount;
     }
-    
+
+}
 
 
-
-/* NOTE: THIS WILL BE MOVED TO A DIFFERENT CLASS OR NEW ONE ENTIRELY.
+/* NOTE: THIS WILL BE MOVED TO A DIFFERENT CLASS OR NEW ONE ENTIRELY. FEEL FREE TO ADJUST THIS OR REMAKE IT ENTIRELY.
 
     //method to check for win conditions
     //the Class Dealer does not exist atm.
@@ -174,7 +174,7 @@ public class Bet{
             }
         }
             */
-*/
+
         //BlackJack winnings has a different multiplier.
         /* 
         if(currentHand.hasBlackJack()){
@@ -193,4 +193,3 @@ public class Bet{
         */
         
    
-}
