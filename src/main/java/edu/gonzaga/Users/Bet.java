@@ -27,12 +27,16 @@ public class Bet{
     //Minimum a Player should be able to bet.
     private int minBet;
 
+    //Variable declared to store the currentPlayer's current balance
+    private int balanceAmount;
+
     //Default constructor
     public Bet(Player currentPlayer, Hand currentHand){
 
         this.currentPlayer = currentPlayer;
         this.currentHand = currentHand;
 
+        balanceAmount = 0;
         betAmount = 0;
         minBet = 5;
 
@@ -40,11 +44,15 @@ public class Bet{
 
 
     //Method to that allows user to place a Bet, this will also check for any invalid inputs.
-    public int placeBet(Player currentPlayer){
+    public int placeBet(Player currentPlayer, int balanceAmount){
+
+        //Getting the value of the current player's funds and
+        //storing into the balanceAmount int variable.
+        balanceAmount = currentPlayer.getCurrency();
        
 
         //if statement to check if the Player's balance is valid.
-        if(currentPlayer.getCurrency()>minBet){
+        if(balanceAmount>minBet){
 
             //Bet options that user can be able to set: 5, 10, 100, and 500.
             System.out.println("Place a bet!");
@@ -64,10 +72,10 @@ public class Bet{
 
                 System.out.println("5 Works");
 
-                if(currentPlayer.getCurrency()>=minBet){
+                if(balanceAmount>=minBet){
 
                     //operations to change the balance of the player when they choose Bet of choice.
-                    int changedBalance = currentPlayer.getCurrency() - minBet;
+                    int changedBalance = balanceAmount - minBet;
                     currentPlayer.setCurrency(changedBalance);
                     betAmount = 5;
 
@@ -82,10 +90,10 @@ public class Bet{
 
                 // Making an if statement to check if the Player has enough for the valid Bet.
                 //If not they will be given an error.
-                if(currentPlayer.getCurrency()>=10){
+                if(balanceAmount>=10){
                     
         
-                    int changedBalance = currentPlayer.getCurrency() - 10;
+                    int changedBalance = balanceAmount - 10;
                     currentPlayer.setCurrency(changedBalance);
                     betAmount = 10;
 
@@ -100,9 +108,9 @@ public class Bet{
                 
                 System.out.println("100 Works");
 
-                if(currentPlayer.getCurrency()>=100){
+                if(balanceAmount>=100){
     
-                    int changedBalance = currentPlayer.getCurrency() - 100;
+                    int changedBalance = balanceAmount - 100;
                     currentPlayer.setCurrency(changedBalance);
                     betAmount = 100;
 
@@ -118,9 +126,9 @@ public class Bet{
                 //debug
                 System.out.println("500 Works");
                 
-                if(currentPlayer.getCurrency()>=500){
+                if(balanceAmount>=500){
 
-                    int changedBalance = currentPlayer.getCurrency() - 100;
+                    int changedBalance = balanceAmount - 100;
                     currentPlayer.setCurrency(changedBalance);
                     betAmount = 500;
 
@@ -131,7 +139,7 @@ public class Bet{
                 }
             }
 
-        }else if(currentPlayer.getCurrency()<minBet){
+        }else if(balanceAmount<minBet){
             System.out.println("You might have lost it all.");
         }
         return betAmount;
