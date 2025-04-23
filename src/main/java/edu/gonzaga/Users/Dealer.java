@@ -4,18 +4,18 @@ import edu.gonzaga.Cards.Deck;
 import edu.gonzaga.Cards.Hand;
 
 public class Dealer {
-    private String name = "Dealer";
+    private String name;
     private Hand dealerhand;
 
-
+    Dealer(){
+        name = "Dealer";
+        dealerhand = new Hand();
+    }
+    
     public String getName(){
         return name;
     }
     
-    private void setName(String name){
-        this.name = name;
-    }
-
     public void initializeDeal(Deck deck){
         dealerhand.popDeck(deck);
         dealerhand.popDeck(deck);
