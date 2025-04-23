@@ -1,11 +1,12 @@
 package edu.gonzaga.Cards;
 
-public class Hand extends Collection{
-    //ArrayList<Card> list = new ArrayList<Card>();
+public class Hand extends Collection
+{
 
     // Need? Probably not
-    public void addToHand(Card card){
-        addCard(card);
+    public void popDeck(Deck deck)
+    {
+        addCard(deck.pop());
     }
 
     public int getScore()
