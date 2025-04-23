@@ -65,6 +65,18 @@ public class Turn
     {
         do
         {
+
+            // Get two cards
+            // View cards
+            // Decide if to take another cards
+            // If not take card, then stand -> Wait for everyone else to go -> Store score of top scores
+            // If bust, end turn with lost money
+            // If not bust, repeat step #2
+
+
+
+
+
             // Actions to loop through in each turn until turn is done
             System.out.println(user.getName() + " played his Turn");
             // Takes a card from deck
