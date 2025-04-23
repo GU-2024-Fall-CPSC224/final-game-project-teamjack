@@ -1,5 +1,6 @@
 package edu.gonzaga.Users;
 
+import edu.gonzaga.Cards.Hand;
 import edu.gonzaga.Game.*;
 
 /** A class for personal player data, including score and name
@@ -16,9 +17,11 @@ public class Player
     // Index of Player
     private int index; 
 
+    // How much money they have
     public int currency;
 
-
+    // Player's individual collection of cards at a given time
+    Hand hand; 
 
     /** Sets score to zero and prompts
      *  user to set a name for Player
@@ -29,6 +32,7 @@ public class Player
         score = 0;
         index = num;
         name = "Unknown Player";
+        hand = new Hand();
     }
 
 
@@ -111,5 +115,7 @@ public class Player
     public int getScore() 
         {return score;}
 
+    public Hand getHand() 
+        {return hand;}
 
 }
