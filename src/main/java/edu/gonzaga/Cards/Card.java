@@ -12,17 +12,17 @@ public class Card
     {
         // Generate random number 1 thorugh 4 for a random suit
         int suitt = (int)(Math.random() * 4) + 1;
-        Integer cardType = (int)(Math.random() * 13) + 1;
+        int cardType = (int)(Math.random() * 13) + 1;
         setCard(cardType, suitt);
     }
 
     // Card constructor for a specific type of card
-    public Card(Integer cardType, int suitt)
+    public Card(int cardType, int suitt)
     {
         setCard(cardType, suitt);
     }
 
-    private void setCard(Integer cardType, int suitt)
+    private void setCard(int cardType, int suitt)
     {
         switch(suitt)
         {
@@ -46,7 +46,7 @@ public class Card
         
         if(cardType >= 2 && cardType <= 10)
         {
-            this.cardType = cardType.toString();
+            this.cardType = Integer.toString(suitt);
             value = cardType;
         }
         else
