@@ -2,6 +2,7 @@ package edu.gonzaga.Users;
 
 import edu.gonzaga.Cards.Hand;
 import edu.gonzaga.Game.Interface;
+import edu.gonzaga.Users.Dealer;
 
 import java.util.Scanner;
 
@@ -140,14 +141,14 @@ public class Bet{
 
     //method to check for win conditions
     //the Class Dealer does not exist atm.
-    public void winCondition(Hand currentHand, Player currentPlayer, Dealer theDealer){
+    public void winCondition(Hand currentHand, Player currentPlayer, Dealer dealer){
 
         //Adjusting the Score if a player wins
         //if a player scores more than the dealer, they win the standard way. 
         //Earnings are doubled
 
         /* Since we dont have a dealer class yet.
-        if(currentHand.getScore() > theDealer.getScore())
+        if(currentHand.getScore() > dealer.getScore())
         {
             System.out.println("Winning Works");
             if(betAmount == 5){
