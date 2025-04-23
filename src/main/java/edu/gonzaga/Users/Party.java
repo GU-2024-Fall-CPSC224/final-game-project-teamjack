@@ -15,6 +15,7 @@ public class Party
 {
 
     private ArrayList<Player> list = new ArrayList<Player>();
+    Dealer dealer;
 
     /** Primary constructor
      * 
@@ -29,6 +30,9 @@ public class Party
             user.promptName();
             add(user);
         }
+
+        dealer = new Dealer();
+
     }
 
 
@@ -47,6 +51,8 @@ public class Party
         {return list.get(index).getScore();}
     public String getPlayerName(int index)
         {return list.get(index).getName();}
+    public Dealer getDealer()
+        {return dealer;}
 
     // Managing the privately stored ArrayList<Player>
     public void add(Player user)
