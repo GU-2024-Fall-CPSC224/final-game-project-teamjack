@@ -20,7 +20,7 @@ public class Turn
     private Player user;
 
     // Stores card stuff
-    Collection hand; // Player's individual collection of cards during their turn
+    Hand hand; // Player's individual collection of cards during their turn
     Deck deck; // Overall deck used in the game
 
 
@@ -35,7 +35,7 @@ public class Turn
         this.deck = deck;
         going = true;
 
-        hand = new Collection();
+        hand = new Hand();
 
         System.out.println("");
         System.out.println("---------------------------");
@@ -67,20 +67,14 @@ public class Turn
         {
             // Actions to loop through in each turn until turn is done
             System.out.println(user.getName() + " played his Turn");
-            addCardToPlayer();
+            // Takes a card from deck
+            hand.popDeck(deck);
+            // Displays new card
             System.out.println(user.getName() + " now has a card: " + hand.getCard(0).getString());
             going = false;
 
         } while (going == true);
         
-    }
-
-
-
-    private void addCardToPlayer()
-    {
-        Card newCard = deck.pop();
-        hand.addCard(newCard);
     }
 
 
