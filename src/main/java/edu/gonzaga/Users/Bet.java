@@ -31,10 +31,10 @@ public class Bet{
     private int balanceAmount;
 
     //Default constructor
-    public Bet(Player currentPlayer, Hand currentHand){
+    public Bet(Player currentPlayer){
 
         this.currentPlayer = currentPlayer;
-        this.currentHand = currentHand;
+        this.currentHand = currentPlayer.getHand();
 
         balanceAmount = 0;
         betAmount = 0;
