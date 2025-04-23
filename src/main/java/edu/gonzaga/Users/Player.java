@@ -16,6 +16,8 @@ public class Player
     // Index of Player
     private int index; 
 
+    public int currency;
+
 
 
     /** Sets score to zero and prompts
@@ -23,6 +25,7 @@ public class Player
      */
     public Player(int num)
     {
+        currency = 1000;
         score = 0;
         index = num;
         name = "Unknown Player";
@@ -85,7 +88,16 @@ public class Player
     public void setScore(int inScore) 
         {score = inScore;}
 
+    // currency variable setter 
+    public void setCurrency(int inCurrency){
+        currency = inCurrency;
+    }
+
         
+    // returns currency
+    public int getCurrency(){
+        return currency;
+    }
 
     /** name variable getter 
      * @return Name of Player
