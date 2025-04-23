@@ -29,9 +29,12 @@ public class Bet{
     private int minBet;
 
     //Default constructor
-    public Bet(){
+    public Bet(Player currentPlayer){
+
+        this.currentPlayer = currentPlayer;
         betAmount = 0;
         minBet = 5;
+
 
     }
 
@@ -137,11 +140,13 @@ public class Bet{
 
     //method to check for win conditions
     //the Class Dealer does not exist atm.
-    public void winCondition(Hand currentHand, Player currentPlayer, Dealer theDealer){
+    public void winCondition(Hand currentHand, Player currentPlayer){
 
         //Adjusting the Score if a player wins
         //if a player scores more than the dealer, they win the standard way. 
         //Earnings are doubled
+
+        /* 
         if(currentHand.getScore() > theDealer.getScore())
         {
             System.out.println("Winning Works");
@@ -164,6 +169,7 @@ public class Bet{
 
             }
         }
+        */
 
         //BlackJack winnings has a different multiplier.
         if(currentHand.hasBlackJack()){
