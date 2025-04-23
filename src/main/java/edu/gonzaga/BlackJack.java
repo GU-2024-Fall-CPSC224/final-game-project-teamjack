@@ -2,8 +2,11 @@
  * Final project main driver class
  * 
  * 
- * Project Description:
- * 
+ * Project Description: This is the card game blackjack. The goal of this game is to get as close to 21 as you can 
+ *                      without going over. The user will play against a "dealer", if the dealer gets closer to
+ *                      21 than the player, or if the player goes over 21 the dealer wins. If the player 
+ *                      gets 21 using only two cards (ace and a ten), the dealer goes over 21, or the player's hand is 
+ *                      higher than the dealer's hand, the player wins.
  * 
  * Contributors:
  * 
