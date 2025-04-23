@@ -8,25 +8,22 @@ public class Hand extends Collection{
         addCard(card);
     }
 
-    public int getScore(){
+    public int getScore()
+    {
         int score = 0;
-        for(int i = 0; i < getSize(); ++i){
+        for(int i = 0; i < getSize(); ++i)
             score += getCard(i).getValue();
-        }
+        
         return score;
     }
 
-    public boolean hasBlackJack(){
-        if(getScore() == 21){
-            return true;
-        }
-        return false;
+    public boolean hasBlackJack()
+    {
+        return (getScore() == 21);
     }
 
-    public boolean bust(){
-        if(getScore() > 21){
-            return true;
-        }
-        return false;
+    public boolean bust()
+    {
+        return (getScore() > 21);
     }
 }
