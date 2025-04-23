@@ -17,11 +17,11 @@ public class Player
     // Index of Player
     private int index; 
 
+    // Player's individual collection of cards at a given time
+    private Hand hand; 
+
     // How much money they have
     public int currency;
-
-    // Player's individual collection of cards at a given time
-    Hand hand; 
 
     /** Sets score to zero and prompts
      *  user to set a name for Player
