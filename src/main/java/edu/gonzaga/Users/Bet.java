@@ -3,8 +3,8 @@ package edu.gonzaga.Users;
 import edu.gonzaga.Cards.Hand;
 import edu.gonzaga.Game.Interface;
 
-
 import java.util.Scanner;
+
 /*
  * NOTE:
  * Feel free to change and adjust anything that would make it more efficient, clean or generally better!
@@ -35,7 +35,6 @@ public class Bet{
         this.currentHand = currentHand;
         betAmount = 0;
         minBet = 5;
-
 
     }
 
@@ -133,7 +132,7 @@ public class Bet{
             }
 
         }else if(currentPlayer.getCurrency()<minBet){
-            System.out.println("Not enough money.");
+            System.out.println("You might have lost it all.");
         }
         return betAmount;
     }
@@ -141,13 +140,13 @@ public class Bet{
 
     //method to check for win conditions
     //the Class Dealer does not exist atm.
-    public void winCondition(Hand currentHand, Player currentPlayer){
+    public void winCondition(Hand currentHand, Player currentPlayer, Dealer theDealer){
 
         //Adjusting the Score if a player wins
         //if a player scores more than the dealer, they win the standard way. 
         //Earnings are doubled
 
-        /* 
+        /* Since we dont have a dealer class yet.
         if(currentHand.getScore() > theDealer.getScore())
         {
             System.out.println("Winning Works");
