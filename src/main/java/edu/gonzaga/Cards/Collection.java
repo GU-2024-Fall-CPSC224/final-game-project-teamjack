@@ -37,7 +37,9 @@ public class Collection
         remCard(0);
         return tmp;
     }
-
+    public int getSize(){
+        return list.size();
+    }
     public void print(){
         Card newCard = new Card();
 
