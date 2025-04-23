@@ -14,8 +14,6 @@ import java.util.Scanner;
  */
 public class Bet{
     
-    //For Player's to Bet.
-    
     
     //Want the current player's info.
     private Player currentPlayer;
@@ -34,6 +32,7 @@ public class Bet{
 
         this.currentPlayer = currentPlayer;
         this.currentHand = currentHand;
+
         betAmount = 0;
         minBet = 5;
 
@@ -139,6 +138,10 @@ public class Bet{
     }
     
 
+
+
+/* NOTE: THIS WILL BE MOVED TO A DIFFERENT CLASS OR NEW ONE ENTIRELY.
+
     //method to check for win conditions
     //the Class Dealer does not exist atm.
     public void winCondition(Hand currentHand, Player currentPlayer, Dealer dealer){
@@ -170,9 +173,10 @@ public class Bet{
 
             }
         }
-        */
-
+            */
+*/
         //BlackJack winnings has a different multiplier.
+        /* 
         if(currentHand.hasBlackJack()){
             System.out.println("BlackJack Works");
 
@@ -186,7 +190,7 @@ public class Bet{
         }
 
     }
+        */
         
-
    
 }
