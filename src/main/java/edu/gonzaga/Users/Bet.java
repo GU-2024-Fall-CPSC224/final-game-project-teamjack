@@ -57,7 +57,7 @@ public class Bet{
         {
 
             //Bet options that user can be able to set: 5, 10, 100, and 500.
-            System.out.println("Hello " + currentPlayer.getName() + "Place a bet!");
+            System.out.println("Hello " + currentPlayer.getName() + " Place a bet!");
             System.out.println("A: 5");
             System.out.println("B: 10");
             System.out.println("C: 100");
