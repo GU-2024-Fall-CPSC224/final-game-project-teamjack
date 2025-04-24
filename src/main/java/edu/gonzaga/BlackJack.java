@@ -15,9 +15,10 @@
  */
 package edu.gonzaga;
 
+import edu.gonzaga.Cards.Deck;
+import edu.gonzaga.Game.Interface;
 import edu.gonzaga.Game.Round;
 import edu.gonzaga.Users.Party;
-import edu.gonzaga.Cards.Deck;
 
 
 /** Main program class for launching your team's program. */
@@ -42,8 +43,13 @@ public class BlackJack
 
     public void prepare()
     {
-
-        party = new Party(2);
+        // Get size of party
+        System.out.println("Welcome to Blackjack!");
+        System.out.println();
+        System.out.println("How many players would yoou like to play with?");
+        String partySize = Interface.promptUser();
+        int size = Integer.parseInt(partySize);
+        party = new Party(size);
         party.displayAllScores();
     }
 
