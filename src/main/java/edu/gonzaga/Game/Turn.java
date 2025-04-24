@@ -23,7 +23,6 @@ public class Turn
     Hand hand; // Player's individual collection of cards during their turn
     Deck deck; // Overall deck used in the game
 
-
     /** Constructor function creates new turn for
      *  inputted user
      * 
@@ -33,8 +32,9 @@ public class Turn
     {
         this.user = user;
         this.deck = deck;
-        going = true;
-        hand = user.getHand();
+        this.going = true;
+        this.hand = user.getHand();
+        this.turnScore = 0;
 
         System.out.println("");
         System.out.println("---------------------------");
@@ -62,104 +62,117 @@ public class Turn
     */
     public void play()
     {
+        
+        hand.popDeck(deck);
+        hand.popDeck(deck);
+
         do
         {
-            System.out.println(user.getName() + "'s Hand: ");
-            // Get two cards and display them
-            for(int i = 0; i < 2; i++){
-                hand.popDeck(deck);
-                System.out.println(hand.getCard(i).getString());
-            }
+            displayHand();
 
             // Decide if to take another cards
             // If not take card, then stand -> Wait for everyone else to go -> Store score of top scores
             // If bust, end turn with lost money
             // If not bust, repeat step #2
 
-            if(action(user, hand) == false){
-                System.out.println("Bust!");
-                turnScore = 0;
-            } else {
-                turnScore = hand.getScore();
-            }
-            going = false;
+            int action = promptAction();
+            performAction(action);
 
+            if ( hand.bust() == true)
+                bustProtocol();
+            
         } while (going == true);
+        
+        if ( hand.bust() == false)
+            turnScore = hand.getScore();
+
         System.out.println(user.getName() + " played his Turn");
         end();
         
     }
 
-    /* action function lets user choose what they want to do during their turn */
-    public boolean action(Player user, Hand hand){
-        
+    private void displayHand()
+    {
+        System.out.println(user.getName() + "'s Hand: ");
+        // Loops through each card to print
+        for (int index = 0 ; index < hand.getSize() ; index++)
+            System.out.println("| " + hand.getCard(index).getString());
+
+        System.out.println("Total: " + hand.getScore());
+    }
+
+    private int promptAction()
+    {
         int actionValue = 0;
+        do
+        {
+            System.out.println(user.getName() + ", action is to you!");
+    
+            //since player can only double their first action, make sure hand only has two cards
+            if(hand.getSize() == 2)
+                System.out.println("Type '1' to hit\n Type '2' to stand\n Type '3' to double");
+            else
+                System.out.println("Type '1' to hit\n Type '2' to stand");
+    
+            //validate input, if invalid, then the loop will repeat
+            String userInput = Interface.promptUser();
+            actionValue = validateAction(userInput);
+    
+        } while (actionValue == 0);
+        return actionValue;
+    }
 
-        System.out.println(user.getName() + ", action is to you!");
-
-        //since player can only double their first action, make sure hand only has two cards
-        if(hand.getSize() == 2){
-            System.out.println("Type '1' to hit\n Type '2' to stand\n Type '3' to double");
-        } else {
-            System.out.println("Type '1' to hit\n Type '2' to stand");
-        }
-
-        //validate input, if invalid call action() again
-        String userInput = Interface.promptUser();
-        actionValue = validateAction(userInput);
-        if(actionValue == -1){
-            return action(user, hand);
-        }
-
+    private void performAction(int actionValue)
+    {
         // 'hit' adds card to user's hand
-        if(actionValue == 1){
+        if(actionValue == 1)
+        {
             System.out.println("Hit!");
             hand.popDeck(deck);
             System.out.println(hand.getCard(hand.getSize() - 1).getString());
-            if(hand.bust() == true){
-                return false;
-            } else {
-            return action(user, hand);
-            }
         }
+
         // 'stand' ends aaction()
-        if(actionValue == 2){
+        if(actionValue == 2)
+        {
             System.out.println("Stand! Ending action");
-            return true;
+            going = false;
         }
+
         // 'double' doubles the bet and 'hits' only once, ending action
-        if(actionValue == 3){
+        if(actionValue == 3)
+        {
             System.out.println("Double!!");
             hand.popDeck(deck);
             System.out.println(hand.getCard(hand.getSize() - 1).getString());
-            if(hand.bust() == true){
-                return false;
-            }
-            return true;
         }
-        return true;
+    }
+
+    private void bustProtocol()
+    {
+        System.out.println("Bust!");
+        turnScore = 0;
+        going = false;
     }
 
     // checks if user input is one digit between 1 and 3 inclusive
-    private int validateAction(String userInput){
-        int userVal = 0;
-        
-        if(userInput.length() != 1){
-            System.out.println("Action invalid");
-            return -1;
-        } else {
-            for(int i = 1; i < 4; i++){
-                if(userInput.contains(String.valueOf(i))){
-                    userVal = Integer.valueOf(userInput);
-                }
-            }
-            if(userVal >= 1){
-                return userVal;
-            } else {
-                System.out.println("Action invalid");
-                return -1;
-            }
+    private int validateAction(String userInput)
+    {
+        int action = 0;
+        try {
+            action = Integer.parseInt(userInput);
         }
+        
+        catch (NumberFormatException e) {
+            System.out.println("Action invalid");
+            return 0;
+        }
+
+        if (hand.getSize() > 2 && action == 3)
+            return 0;
+        
+        return action;
+
     }
 
 
