@@ -37,6 +37,7 @@ public class Round
         this.numRound = numRound;
         this.deck = new Deck();
         this.betList = new ArrayList<Bet>();
+        this.dealerHand = party.getDealer().getHand();
 
         System.out.println("");
         System.out.println("---------------------------");
