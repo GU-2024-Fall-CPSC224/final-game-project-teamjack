@@ -44,7 +44,8 @@ public class Bet{
 
 
     //Method to that allows user to place a Bet, this will also check for any invalid inputs.
-    public int placeBet(Player currentPlayer, int balanceAmount){
+    public int placeBet(Player currentPlayer)
+    {
 
         //Getting the value of the current player's funds and
         //storing into the balanceAmount int variable.
@@ -52,7 +53,8 @@ public class Bet{
        
 
         //if statement to check if the Player's balance is valid.
-        if(balanceAmount>minBet){
+        if (balanceAmount > minBet) 
+        {
 
             //Bet options that user can be able to set: 5, 10, 100, and 500.
             System.out.println("Place a bet!");
