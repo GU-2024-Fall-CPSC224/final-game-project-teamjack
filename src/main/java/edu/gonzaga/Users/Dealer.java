@@ -32,15 +32,18 @@ public class Dealer {
     // Or get hand, will only show what is in the hand at the current time
     // We will use the second card in the hand list to mimic the game but never
     // Ouput / reveal it
-    public void getHand(){
+    public void printHand()
+    {
         for(int i = 0; i < dealerhand.getSize(); ++i){
             if(i != 1){
                 System.out.println(dealerhand.getCard(i));
             }
         }
-        System.out.println(dealerhand.getCard(0));
-        System.out.println(dealerhand.getCard(1));
     }
+
+    public Hand getHand()
+        {return dealerhand;}
+
     public int getScore(){
         return dealerhand.getScore();
     }
