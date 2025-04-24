@@ -34,8 +34,7 @@ public class Turn
         this.user = user;
         this.deck = deck;
         going = true;
-
-        hand = new Hand();
+        hand = user.getHand();
 
         System.out.println("");
         System.out.println("---------------------------");
@@ -65,30 +64,106 @@ public class Turn
     {
         do
         {
+            System.out.println(user.getName() + "'s Hand: ");
+            // Get two cards and display them
+            for(int i = 0; i < 2; i++){
+                hand.popDeck(deck);
+                System.out.println(hand.getCard(i).getString());
+            }
 
-            // Get two cards
-            // View cards
             // Decide if to take another cards
             // If not take card, then stand -> Wait for everyone else to go -> Store score of top scores
             // If bust, end turn with lost money
             // If not bust, repeat step #2
 
-
-
-
-
-            // Actions to loop through in each turn until turn is done
-            System.out.println(user.getName() + " played his Turn");
-            // Takes a card from deck
-            hand.popDeck(deck);
-            // Displays new card
-            System.out.println(user.getName() + " now has a card: " + hand.getCard(0).getString());
+            if(action(user, hand) == false){
+                System.out.println("Bust!");
+                turnScore = 0;
+            } else {
+                turnScore = hand.getScore();
+            }
             going = false;
 
         } while (going == true);
+        System.out.println(user.getName() + " played his Turn");
+        end();
         
     }
 
+    /* action function lets user choose what they want to do during their turn */
+    public boolean action(Player user, Hand hand){
+        
+        int actionValue = 0;
+
+        System.out.println(user.getName() + ", action is to you!");
+
+        //since player can only double their first action, make sure hand only has two cards
+        if(hand.getSize() == 2){
+            System.out.println("Type '1' to hit\n Type '2' to stand\n Type '3' to double");
+        } else {
+            System.out.println("Type '1' to hit\n Type '2' to stand");
+        }
+
+        //validate input, if invalid call action() again
+        String userInput = Interface.promptUser();
+        actionValue = validateAction(userInput);
+        if(actionValue == -1){
+            return action(user, hand);
+        }
+
+        // 'hit' adds card to user's hand
+        if(actionValue == 1){
+            System.out.println("Hit!");
+            hand.popDeck(deck);
+            System.out.println(hand.getCard(hand.getSize() - 1).getString());
+            if(hand.bust() == true){
+                return false;
+            } else {
+            return action(user, hand);
+            }
+        }
+        // 'stand' ends aaction()
+        if(actionValue == 2){
+            System.out.println("Stand! Ending action");
+            return true;
+        }
+        // 'double' doubles the bet and 'hits' only once, ending action
+        if(actionValue == 3){
+            System.out.println("Double!!");
+            hand.popDeck(deck);
+            System.out.println(hand.getCard(hand.getSize() - 1).getString());
+            if(hand.bust() == true){
+                return false;
+            }
+            return true;
+        }
+        return true;
+    }
+
+    // checks if user input is one digit between 1 and 3 inclusive
+    private int validateAction(String userInput){
+        int userVal = 0;
+        
+        if(userInput.length() != 1){
+            System.out.println("Action invalid");
+            return -1;
+        } else {
+            for(int i = 1; i < 4; i++){
+                if(userInput.contains(String.valueOf(i))){
+                    userVal = Integer.valueOf(userInput);
+                }
+            }
+            if(userVal >= 1){
+                return userVal;
+            } else {
+                System.out.println("Action invalid");
+                return -1;
+            }
+        }
+    }
+
+
+    //win condition including aces here:
 
     /** going variable getter
      * @return If the turn is still going
