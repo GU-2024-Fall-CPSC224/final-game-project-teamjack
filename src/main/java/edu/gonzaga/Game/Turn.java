@@ -115,10 +115,12 @@ public class Turn
                 System.out.println("Type '1' to hit\n Type '2' to stand");
     
             //validate input, if invalid, then the loop will repeat
-            String userInput = Interface.promptUser();
-            actionValue = validateAction(userInput);
+            actionValue = Interface.promptUserInt();
+
+            if (hand.getSize() > 2 && actionValue == 3)
+                actionValue = -1;
     
-        } while (actionValue == 0);
+        } while (actionValue <= 0);
         return actionValue;
     }
 
@@ -154,27 +156,6 @@ public class Turn
         turnScore = 0;
         going = false;
     }
-
-    // checks if user input is one digit between 1 and 3 inclusive
-    private int validateAction(String userInput)
-    {
-        int action = 0;
-        try {
-            action = Integer.parseInt(userInput);
-        }
-        
-        catch (NumberFormatException e) {
-            System.out.println("Action invalid");
-            return 0;
-        }
-
-        if (hand.getSize() > 2 && action == 3)
-            return 0;
-        
-        return action;
-
-    }
-
 
     //win condition including aces here:
 

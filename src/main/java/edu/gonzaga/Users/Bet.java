@@ -24,11 +24,11 @@ public class Bet{
     //Current Bet amount, default is set to 0
     private int betAmount;
 
-    //Minimum a Player should be able to bet.
-    private int minBet;
-
     //Variable declared to store the currentPlayer's current balance
     private int balanceAmount;
+
+    private static final int NUM_BET_OPTIONS = 4;
+    private static final int MIN_BET = 5;
 
     //Default constructor
     public Bet(Player currentPlayer){
@@ -36,116 +36,113 @@ public class Bet{
         this.currentPlayer = currentPlayer;
         this.currentHand = currentPlayer.getHand();
 
-        balanceAmount = 0;
-        betAmount = 0;
-        minBet = 5;
-
+        this.balanceAmount = currentPlayer.getCurrency();
+        this.betAmount = 0;
     }
 
 
     //Method to that allows user to place a Bet, this will also check for any invalid inputs.
-    public int placeBet(Player currentPlayer)
+    public void placeBet(Player currentPlayer)
     {
+
+        if (!canBet())
+        {
+            System.out.println("You do not have enough money for this bet!");
+            betAmount = 0;
+            return;
+        }
 
         //Getting the value of the current player's funds and
         //storing into the balanceAmount int variable.
         balanceAmount = currentPlayer.getCurrency();
        
+        promptBet();
 
-        //if statement to check if the Player's balance is valid.
-        if (balanceAmount > minBet) 
-        {
+        // Once bet amount is determined, updates player's currency
+        int changedBalance = balanceAmount - betAmount;
+        currentPlayer.setCurrency(changedBalance);
 
-            //Bet options that user can be able to set: 5, 10, 100, and 500.
-            System.out.println("Hello " + currentPlayer.getName() + " Place a bet!");
-            System.out.println("A: 5");
-            System.out.println("B: 10");
-            System.out.println("C: 100");
-            System.out.println("D: 500");
-            
-            String input = Interface.promptUser();
-
-            //Bet options will be placed via a range of chars of A-D
-            char betChoice = input.charAt(0);
-
-
-            //this is the actual betting feature
-            if(betChoice == 'A'){
-
-                System.out.println("5 Works");
-
-                if(balanceAmount>=minBet){
-
-                    //operations to change the balance of the player when they choose Bet of choice.
-                    int changedBalance = balanceAmount - minBet;
-                    currentPlayer.setCurrency(changedBalance);
-                    betAmount = 5;
-
-                    return betAmount;
-                }
-
-            //similarity to above
-            }else if(betChoice == 'B'){
-
-                //for debugging testing if it works
-                System.out.println("10 Works");
-
-                // Making an if statement to check if the Player has enough for the valid Bet.
-                //If not they will be given an error.
-                if(balanceAmount>=10){
-                    
-        
-                    int changedBalance = balanceAmount - 10;
-                    currentPlayer.setCurrency(changedBalance);
-                    betAmount = 10;
-
-                    return betAmount;
-
-                }else{
-                    System.out.println("Not enough currency!");
-            
-                }
-
-            }else if(betChoice == 'C'){
-                
-                System.out.println("100 Works");
-
-                if(balanceAmount>=100){
-    
-                    int changedBalance = balanceAmount - 100;
-                    currentPlayer.setCurrency(changedBalance);
-                    betAmount = 100;
-
-                    return betAmount;
-
-                }else{
-                    System.out.println("Not enough currency!");
-           
-                }
-                      
-            }else if(betChoice == 'D'){
-
-                //debug
-                System.out.println("500 Works");
-                
-                if(balanceAmount>=500){
-
-                    int changedBalance = balanceAmount - 100;
-                    currentPlayer.setCurrency(changedBalance);
-                    betAmount = 500;
-
-                    return betAmount;
-
-                }else{
-                    System.out.println("Not enough currency!");
-                }
-            }
-
-        }else if(balanceAmount<minBet){
-            System.out.println("You might have lost it all.");
-        }
-        return betAmount;
+        return;
     }
+
+
+    private void promptBet()
+    {
+        // Loops for player input on bet amount until valid bet amount is given
+        do
+        {
+            displayAnyErrors(betAmount);
+
+            // Prompts player to input an amount
+            System.out.println("");
+            System.out.println(currentPlayer.getName() + ", please place a bet");
+            for (int index = 0 ; index < NUM_BET_OPTIONS ; index++)
+                System.out.println( Character.toString((char)index + 65) + ": " + Integer.toString(getBetNum(index)));
+
+            // Displays balance
+            System.out.println("");
+            System.out.println("Your balance: " + currentPlayer.getCurrency());
+
+            // Prompts for action
+            System.out.println("");
+            char input = Interface.promptUser().charAt(0);
+            int betChoice = Character.toUpperCase(input) - 65;
+
+            System.out.println(betChoice);
+
+            // Sets bet amount
+            betAmount = getBetNum(betChoice);
+
+            if (betAmount > balanceAmount)
+                betAmount = -3;
+
+        } while (betAmount <= 0);
+
+    }
+
+    private int getBetNum(char index)
+        {return getBetNum((int)index - 65);}
+
+    private int getBetNum(int index)
+    {
+        switch (index)
+        {
+            case 0:
+                return 5;
+            case 1:
+                return 10;
+            case 2:
+                return 100;
+            case 3:
+                return 500;
+        }
+        // If bet option does not exist, returns -1
+        return -1;
+    }
+
+    private void displayAnyErrors(int betAmount)
+    {
+        if (betAmount == -1)
+                System.out.println("Error! Invalid input");
+
+        if (betAmount == -2)
+            System.out.println("Error! Try again");
+
+        if (betAmount == -3)
+            System.out.println("Error! You do not have enough money for this bet!");
+    }
+
+
+
+    public boolean canBet()
+    {
+        if (balanceAmount < MIN_BET)
+            return false;
+
+        return true;
+    }
+    
+
 
 }
 

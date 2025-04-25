@@ -43,5 +43,23 @@ public class Interface
         return in.nextLine();
     }
 
+    
+    public static int promptUserInt()
+    {
+        String userInput = promptUser();
+
+        int action = 0;
+        try {
+            action = Integer.parseInt(userInput);
+        }
+        
+        catch (NumberFormatException e) {
+            System.out.println("Action invalid");
+            return -1;
+        }
+        
+        return action;
+
+    }
 
 }
