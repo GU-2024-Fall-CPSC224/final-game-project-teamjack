@@ -2,6 +2,10 @@ package edu.gonzaga.Cards;
 
 public class Hand extends Collection
 {
+    public Hand()
+    {
+        super();
+    }
 
     // Need? Probably not
     public void popDeck(Deck deck)
@@ -13,7 +17,11 @@ public class Hand extends Collection
     {
         int score = 0;
         for(int i = 0; i < getSize(); ++i)
+        {
             score += getCard(i).getValue();
+            System.out.println(getCard(i).getValue());
+        }
+            
         
         return score;
     }

@@ -56,6 +56,7 @@ public class Card
                 case 1:
                     // Ace so value can be either 1 or 10
                     this.cardType = "Ace";
+                    value = 1;
                     break;
                 case 11:
                     this.cardType = "Jack";

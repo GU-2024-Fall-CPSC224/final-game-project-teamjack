@@ -41,6 +41,11 @@ public class BlackJack
 
     }
 
+    public BlackJack()
+    {
+        this.deck = new Deck();
+    }
+
     public void prepare()
     {
         // Get size of party
