@@ -114,4 +114,38 @@ public class Round
             System.out.println(dealerHand.getCard(index).getString());
     }
 
+    //win condition including aces here:
+    public void winCondition(Party party){
+
+        for(int i = 0; i < party.size() - 1){
+            Hand playerHand = party.getPlayer().getHand();
+            int playerBet = betList[i];
+
+        if(dealerHand.hasBlackJack() && !playerHand.hasBlackJack()){
+            System.out.println("Dealer has blackjack, you lose");
+            return;
+        }
+        
+        if(playerHand.hasBlackJack()){
+            System.out.println("Blackjack!");
+            if(dealerHand.hasBlackJack()){
+                System.out.println("Unlucky! It's a push.");
+                // give bet amount back to user
+                party.getPlayer().setCurrency(party.getPlayer().betList[]);
+            } 
+        } else {
+            if(party.getPlayer().getHand().getScore() > party.getDealer().getHand().getScore() && party.getPlayer().getHand().getScore() <= 21){
+                //win, give user bet amount x 2
+                System.out.println("Winner Winner!");
+            } else if(hand.getScore() == dealer.getHand().getScore()){
+                //push, give bet amount back to user
+                System.out.println("Push!");
+            } else {
+                //loss
+                System.out.println("You lost...");
+                return;
+            }
+        }
+    }
+
 }

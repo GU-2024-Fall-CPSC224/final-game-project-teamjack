@@ -116,12 +116,10 @@ public class Turn
                 System.out.println("Type '1' to hit\n Type '2' to stand");
     
             //validate input, if invalid, then the loop will repeat
-            actionValue = Interface.promptUserInt();
-
-            if (hand.getSize() > 2 && actionValue == 3)
-                actionValue = -1;
+            String userInput = Interface.promptUser();
+            actionValue = validateAction(userInput);
     
-        } while (actionValue <= 0);
+        } while (actionValue == 0);
         return actionValue;
     }
 
@@ -158,32 +156,24 @@ public class Turn
         going = false;
     }
 
-    //win condition including aces here:
-    public void winCondition(Player user, Hand hand, int turnScore, Dealer dealer, Bet bet){
-        if(dealer.getHand().hasBlackJack() && !hand.hasBlackJack()){
-            System.out.println("Dealer has blackjack, you lose");
-            return;
+    // checks if user input is one digit between 1 and 3 inclusive
+    private int validateAction(String userInput)
+    {
+        int action = 0;
+        try {
+            action = Integer.parseInt(userInput);
         }
         
-        if(hand.hasBlackJack()){
-            System.out.println("Blackjack!");
-            if(dealer.getHand().hasBlackJack()){
-                System.out.println("Unlucky! It's a push.");
-                // give bet amount back to user
-            }
-        } else {
-            if(hand.getScore() > dealer.getHand().getScore()){
-                //win, give user bet amount x 2
-                System.out.println("Winner Winner!")
-            } else if(hand.getScore() == dealer.getHand().getScore()){
-                //push, give bet amount back to user
-                System.out.println("Push!")
-            } else {
-                //loss
-                System.out.println("You lost...");
-                return;
-            }
+        catch (NumberFormatException e) {
+            System.out.println("Action invalid");
+            return 0;
         }
+
+        if (hand.getSize() > 2 && action == 3)
+            return 0;
+        
+        return action;
+
     }
 
     /** going variable getter
