@@ -2,6 +2,7 @@
 package edu.gonzaga.Game;
 
 import edu.gonzaga.Users.Player;
+import edu.gonzaga.Users.Bet;
 import edu.gonzaga.Cards.*;
 
 /** Manages a single turn for an individual player 
@@ -158,6 +159,32 @@ public class Turn
     }
 
     //win condition including aces here:
+    public void winCondition(Player user, Hand hand, int turnScore, Dealer dealer, Bet bet){
+        if(dealer.getHand().hasBlackJack() && !hand.hasBlackJack()){
+            System.out.println("Dealer has blackjack, you lose");
+            return;
+        }
+        
+        if(hand.hasBlackJack()){
+            System.out.println("Blackjack!");
+            if(dealer.getHand().hasBlackJack()){
+                System.out.println("Unlucky! It's a push.");
+                // give bet amount back to user
+            }
+        } else {
+            if(hand.getScore() > dealer.getHand().getScore()){
+                //win, give user bet amount x 2
+                System.out.println("Winner Winner!")
+            } else if(hand.getScore() == dealer.getHand().getScore()){
+                //push, give bet amount back to user
+                System.out.println("Push!")
+            } else {
+                //loss
+                System.out.println("You lost...");
+                return;
+            }
+        }
+    }
 
     /** going variable getter
      * @return If the turn is still going
