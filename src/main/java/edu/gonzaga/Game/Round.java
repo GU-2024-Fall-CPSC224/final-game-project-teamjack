@@ -22,7 +22,6 @@ public class Round
     private Party party; // User performing their turn in round
     private int numRound;
     private Deck deck; // Deck created to use for the round
-    private Hand dealerHand;
     private ArrayList<Bet> betList;
 
 
@@ -37,7 +36,6 @@ public class Round
         this.numRound = numRound;
         this.deck = new Deck();
         this.betList = new ArrayList<Bet>();
-        this.dealerHand = party.getDealer().getHand();
 
         System.out.println("");
         System.out.println("---------------------------");
@@ -53,6 +51,7 @@ public class Round
         System.out.println("");
         System.out.println("The round has ended!");
         System.out.println("");
+
     }
 
 
@@ -84,6 +83,8 @@ public class Round
 
         // Update currency
 
+        comparePartyCards();
+
     }
 
     private void createPartyBets()
@@ -102,12 +103,15 @@ public class Round
 
     private void getDealerCards()
     {
+        Hand dealerHand = party.getDealer().getHand();
         dealerHand.popDeck(deck);
         dealerHand.popDeck(deck);
     }
 
     private void displayDealerCards(int num)
     {
+        Hand dealerHand = party.getDealer().getHand();
+        
         System.out.println("Dealer's Hand:");
         for (int index = 0 ; (index < num) && (index < dealerHand.getSize()) ; index++)
             // Gets the string representation of the dealer's indexed card
@@ -115,38 +119,61 @@ public class Round
     }
 
     //win condition including aces here:
-    public void winCondition(Party party){
+    private void comparePartyCards()
+    {
+        for(int index = 0; index < party.size() - 1 ; index++)
+            comparePlayerCards(index);
+    }
 
-        for(int i = 0; i < party.size() - 1){
-            Hand playerHand = party.getPlayer(i).getHand();
-            int playerBet = betList[i];
+    private void comparePlayerCards(int index)
+    {
+        // Grabs the hand of the dealer
+        Hand dealerHand = party.getDealer().getHand();
+        
+        // Grabs player's hand and their bet amount
+        Hand playerHand = party.getPlayer(index).getHand();
+        int betAmount = betList.get(index).getBetAmount();
 
-            if(dealerHand.hasBlackJack() && !playerHand.hasBlackJack()){
-                System.out.println("Dealer has blackjack, you lose");
+        // Below checks if the player wins
+
+        if(dealerHand.hasBlackJack() && !playerHand.hasBlackJack())
+        {
+            System.out.println("Dealer has blackjack, you lose");
+            return;
+        }
+    
+        if(playerHand.hasBlackJack())
+        {
+            System.out.println("Blackjack!");
+            if(dealerHand.hasBlackJack())
+            {
+                System.out.println("Unlucky! It's a push.");
+                // give bet amount back to user
+                party.getPlayer(index).setCurrency(party.getPlayer(index).getCurrency() + betAmount);
+            } 
+        }
+        
+        else
+        {
+            if(playerHand.getScore() > dealerHand.getScore() && playerHand.getScore() <= 21)
+            {
+                //win, give user bet amount x 2
+                System.out.println("Winner Winner!");
+                party.getPlayer(index).setCurrency(party.getPlayer(index).getCurrency() + 2 * betAmount);
+            } 
+            
+            else if(playerHand.getScore() == dealerHand.getScore())
+            {
+                //push, give bet amount back to user
+                party.getPlayer(index).setCurrency(party.getPlayer(index).getCurrency() + betAmount);
+                System.out.println("Push!");
+            } 
+            else 
+            {
+                //loss
+                System.out.println("You lost...");
                 return;
             }
-        
-            if(playerHand.hasBlackJack()){
-                System.out.println("Blackjack!");
-                if(dealerHand.hasBlackJack()){
-                    System.out.println("Unlucky! It's a push.");
-                    // give bet amount back to user
-                    party.getPlayer(i).setCurrency(party.getPlayer(i).getCurrency() + playerBet);
-                } 
-            } else {
-                if(playerHand.getScore() > dealerHand.getScore() && playerHand.getScore() <= 21){
-                    //win, give user bet amount x 2
-                    System.out.println("Winner Winner!");
-                    party.getPLayer(i).setCurrency(party.getPlayer(i).getCurrency() + 2 * playerBet);
-                } else if(playerHand.getScore() == dealerHand.getScore()){
-                    //push, give bet amount back to user
-                    party.getPlayer(i).setCurrency(party.getPlayer(i).getCurrency() + playerBet);
-                    System.out.println("Push!");
-                } else {
-                    //loss
-                    System.out.println("You lost...");
-                    return;
-                }
         }
     }
 

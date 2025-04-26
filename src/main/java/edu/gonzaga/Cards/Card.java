@@ -93,10 +93,10 @@ public class Card
         this.value = value;
     }
     public void print(){
-        System.out.println(cardType + " of " + suit.getName());
+        System.out.println(getValue() + " of " + suit.getName());
     }
     public String getString(){
-        return (cardType + " of " + suit.getName());
+        return (getValue() + " of " + suit.getName());
     }
 }
 

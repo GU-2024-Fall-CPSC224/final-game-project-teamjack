@@ -2,9 +2,6 @@ package edu.gonzaga.Users;
 
 import edu.gonzaga.Cards.Hand;
 import edu.gonzaga.Game.Interface;
-import edu.gonzaga.Users.Dealer;
-
-import java.util.Scanner;
 
 /*
  * NOTE:
@@ -16,7 +13,7 @@ public class Bet{
     
     
     //Want the current player's info.
-    private Player currentPlayer;
+    private Player player;
 
     //Want current hand info
     private Hand currentHand;
@@ -24,25 +21,21 @@ public class Bet{
     //Current Bet amount, default is set to 0
     private int betAmount;
 
-    //Variable declared to store the currentPlayer's current balance
-    private int balanceAmount;
-
     private static final int NUM_BET_OPTIONS = 4;
     private static final int MIN_BET = 5;
 
     //Default constructor
-    public Bet(Player currentPlayer){
+    public Bet(Player player)
+    {
+        this.player = player;
+        this.currentHand = player.getHand();
 
-        this.currentPlayer = currentPlayer;
-        this.currentHand = currentPlayer.getHand();
-
-        this.balanceAmount = currentPlayer.getCurrency();
         this.betAmount = 0;
     }
 
 
     //Method to that allows user to place a Bet, this will also check for any invalid inputs.
-    public void placeBet(Player currentPlayer)
+    public void placeBet(Player player)
     {
 
         if (!canBet())
@@ -54,13 +47,13 @@ public class Bet{
 
         //Getting the value of the current player's funds and
         //storing into the balanceAmount int variable.
-        balanceAmount = currentPlayer.getCurrency();
+        int balanceAmount = player.getCurrency();
        
         promptBet();
 
         // Once bet amount is determined, updates player's currency
         int changedBalance = balanceAmount - betAmount;
-        currentPlayer.setCurrency(changedBalance);
+        player.setCurrency(changedBalance);
 
         return;
     }
@@ -68,31 +61,24 @@ public class Bet{
 
     private void promptBet()
     {
+        int balanceAmount = player.getCurrency();
+
         // Loops for player input on bet amount until valid bet amount is given
         do
         {
             displayAnyErrors(betAmount);
 
-            // Prompts player to input an amount
-            System.out.println("");
-            System.out.println(currentPlayer.getName() + ", please place a bet");
-            for (int index = 0 ; index < NUM_BET_OPTIONS ; index++)
-                System.out.println( Character.toString((char)index + 65) + ": " + Integer.toString(getBetNum(index)));
-
-            // Displays balance
-            System.out.println("");
-            System.out.println("Your balance: " + currentPlayer.getCurrency());
+            displayBetOptions();
 
             // Prompts for action
             System.out.println("");
             char input = Interface.promptUser().charAt(0);
             int betChoice = Character.toUpperCase(input) - 65;
 
-            System.out.println(betChoice);
-
             // Sets bet amount
             betAmount = getBetNum(betChoice);
 
+            // Check if player can afford bet
             if (betAmount > balanceAmount)
                 betAmount = -3;
 
@@ -132,17 +118,32 @@ public class Bet{
             System.out.println("Error! You do not have enough money for this bet!");
     }
 
+    private void displayBetOptions()
+    {
+        // Prompts player to input an amount
+        System.out.println("");
+        System.out.println(player.getName() + ", please place a bet");
+        for (int index = 0 ; index < NUM_BET_OPTIONS ; index++)
+            System.out.println( Character.toString((char)index + 65) + ": " + Integer.toString(getBetNum(index)));
+
+        // Displays balance
+        System.out.println("");
+        System.out.println("Your balance: " + player.getCurrency());
+    }
+
 
 
     public boolean canBet()
     {
-        if (balanceAmount < MIN_BET)
+        if (player.getCurrency() < MIN_BET)
             return false;
 
         return true;
     }
     
 
+    public int getBetAmount()
+        {return betAmount;}
 
 }
 
@@ -151,7 +152,7 @@ public class Bet{
 
     //method to check for win conditions
     //the Class Dealer does not exist atm.
-    public void winCondition(Hand currentHand, Player currentPlayer, Dealer dealer){
+    public void winCondition(Hand currentHand, Player player, Dealer dealer){
 
         //Adjusting the Score if a player wins
         //if a player scores more than the dealer, they win the standard way. 
@@ -163,20 +164,20 @@ public class Bet{
             System.out.println("Winning Works");
             if(betAmount == 5){
 
-                int changedBalance = currentPlayer.getCurrency() + betAmount*2;
-                currentPlayer.setCurrency(changedBalance);
+                int changedBalance = player.getCurrency() + betAmount*2;
+                player.setCurrency(changedBalance);
 
             }else if(betAmount == 10){
-                int changedBalance = currentPlayer.getCurrency() + betAmount*2;
-                currentPlayer.setCurrency(changedBalance);
+                int changedBalance = player.getCurrency() + betAmount*2;
+                player.setCurrency(changedBalance);
 
             }else if(betAmount == 100){
-                int changedBalance = currentPlayer.getCurrency() + betAmount*2;
-                currentPlayer.setCurrency(changedBalance);
+                int changedBalance = player.getCurrency() + betAmount*2;
+                player.setCurrency(changedBalance);
 
             }else if(betAmount == 500){
-                int changedBalance = currentPlayer.getCurrency() + betAmount*2;
-                currentPlayer.setCurrency(changedBalance);
+                int changedBalance = player.getCurrency() + betAmount*2;
+                player.setCurrency(changedBalance);
 
             }
         }
@@ -188,8 +189,8 @@ public class Bet{
             System.out.println("BlackJack Works");
 
             //want our balance to stay as int.
-            int changedBalance = currentPlayer.getCurrency() + betAmount + (int)(betAmount*1.5);
-            currentPlayer.setCurrency(changedBalance);
+            int changedBalance = player.getCurrency() + betAmount + (int)(betAmount*1.5);
+            player.setCurrency(changedBalance);
 
         }else if(currentHand.bust()){
             System.out.println("Losing Works");

@@ -69,7 +69,7 @@ public class Turn
 
         do
         {
-            displayHand();
+            displayStats();
 
             // Decide if to take another cards
             // If not take card, then stand -> Wait for everyone else to go -> Store score of top scores
@@ -92,14 +92,17 @@ public class Turn
         
     }
 
-    private void displayHand()
+    private void displayStats()
     {
+        System.out.println("");
         System.out.println(user.getName() + "'s Hand: ");
         // Loops through each card to print
         for (int index = 0 ; index < hand.getSize() ; index++)
             System.out.println("| " + hand.getCard(index).getString());
 
-        System.out.println("Total: " + hand.getScore());
+        System.out.println("Total:\t" + hand.getScore());
+        //System.out.println("Dealer:\t" + .getScore());
+        System.out.println("");
     }
 
     private int promptAction()
