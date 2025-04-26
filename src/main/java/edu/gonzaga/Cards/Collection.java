@@ -37,6 +37,10 @@ public class Collection
         remCard(0);
         return tmp;
     }
+
+    public Card peek()
+        {return getCard(0);}
+
     public int getSize(){
         return list.size();
     }

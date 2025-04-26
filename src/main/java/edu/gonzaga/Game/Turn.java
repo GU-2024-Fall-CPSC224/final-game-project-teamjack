@@ -2,7 +2,7 @@
 package edu.gonzaga.Game;
 
 import edu.gonzaga.Users.Player;
-import edu.gonzaga.Users.Bet;
+import edu.gonzaga.Users.Dealer;
 import edu.gonzaga.Cards.*;
 
 /** Manages a single turn for an individual player 
@@ -19,6 +19,7 @@ public class Turn
 
     // User performing their turn in turn
     private Player user;
+    private Dealer dealer;
 
     // Stores card stuff
     Hand hand; // Player's individual collection of cards during their turn
@@ -29,9 +30,10 @@ public class Turn
      * 
      *  @param  inUser Player set to be playing this turn
      */
-    public Turn(Player user, Deck deck) 
+    public Turn(Player user, Dealer dealer, Deck deck) 
     {
         this.user = user;
+        this.dealer = dealer;
         this.deck = deck;
         this.going = true;
         this.hand = user.getHand();
@@ -86,9 +88,6 @@ public class Turn
         
         if ( hand.bust() == false)
             turnScore = hand.getScore();
-
-        System.out.println(user.getName() + " played his Turn");
-        end();
         
     }
 
@@ -101,7 +100,7 @@ public class Turn
             System.out.println("| " + hand.getCard(index).getString());
 
         System.out.println("Total:\t" + hand.getScore());
-        //System.out.println("Dealer:\t" + .getScore());
+        System.out.println("Dealer:\t" + dealer.getHand().peek().getValue() + " (based on theonly seen card)");
         System.out.println("");
     }
 
@@ -154,6 +153,7 @@ public class Turn
 
     private void bustProtocol()
     {
+        // **Improve bust message
         System.out.println("Bust!");
         turnScore = 0;
         going = false;

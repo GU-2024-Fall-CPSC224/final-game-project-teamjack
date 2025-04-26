@@ -70,7 +70,14 @@ public class Round
         // Start of player's turn after bet
         for (int index = 0 ; index < party.size() ; index++)
         {
-            Turn curTurn = new Turn(party.getPlayer(index), deck);
+            // Initialize a turn for a particular player
+            Turn curTurn = new Turn
+            (
+                party.getPlayer(index), 
+                party.getDealer(),
+                deck
+            );
+            // Perform and then end the turn
             curTurn.play();
             curTurn.end();
             party.displayAllScores();
