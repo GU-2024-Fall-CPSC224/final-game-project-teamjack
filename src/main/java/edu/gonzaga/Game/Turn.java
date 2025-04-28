@@ -80,7 +80,9 @@ public class Turn
 
             int action = promptAction();
             performAction(action);
-
+            if(dealer.getHand().bust()){
+                dealerBust();
+            }
             if ( hand.bust() == true)
                 bustProtocol();
             
@@ -174,6 +176,12 @@ public class Turn
         
         return action;
 
+    }
+
+    public void dealerBust(){
+        System.out.println("Dealer busts! you win!");
+        turnscore = hand.getScore();
+        going = false;  
     }
 
     /** going variable getter
