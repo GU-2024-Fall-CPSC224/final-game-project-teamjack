@@ -223,7 +223,7 @@ public class Round
                 playerHand.clearHand();
             } 
             
-            else if(playerHand.getScore() == dealerHand.getScore())
+            else if(playerHand.getScore() == dealerHand.getScore() && playerHand.getScore() <= 21);
             {
                 //push, give bet amount back to user
                 party.getPlayer(index).setCurrency(party.getPlayer(index).getCurrency() + betAmount);
