@@ -192,12 +192,6 @@ public class Round
             return;
         }
 
-        if(dealerHand.getScore() > 21 && playerHand.getScore() <= 21){
-            System.out.println("Dealer busts, you win!");
-            party.getPlayer(index).setCurrency(party.getPlayer(index).getCurrency() + 2 * betAmount);
-            dealerHand.clearHand();
-            playerHand.clearHand();
-        }
 
         if(playerHand.hasBlackJack())
         {
@@ -230,9 +224,14 @@ public class Round
                 System.out.println("Push!");
                 dealerHand.clearHand();
                 playerHand.clearHand();
-            } 
-            else 
-            {
+            }
+            else if(dealerHand.getScore() > 21 && playerHand.getScore() <= 21){
+                System.out.println("Dealer busts, you win!");
+                party.getPlayer(index).setCurrency(party.getPlayer(index).getCurrency() + 2 * betAmount);
+                dealerHand.clearHand();
+                playerHand.clearHand();
+            }
+            else{
                 //loss
                 System.out.println("You lost... :(");
                 dealerHand.clearHand();
