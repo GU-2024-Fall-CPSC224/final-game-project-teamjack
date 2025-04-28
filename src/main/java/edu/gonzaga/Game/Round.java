@@ -187,6 +187,8 @@ public class Round
         if(dealerHand.hasBlackJack() && !playerHand.hasBlackJack())
         {
             System.out.println("Dealer has blackjack, you lose");
+            dealerHand.clearHand();
+            playerHand.clearHand();
             return;
         }
     
@@ -198,6 +200,8 @@ public class Round
                 System.out.println("Unlucky! It's a push.");
                 // give bet amount back to user
                 party.getPlayer(index).setCurrency(party.getPlayer(index).getCurrency() + betAmount);
+                dealerHand.clearHand();
+                playerHand.clearHand();
             } 
         }
         
@@ -208,6 +212,8 @@ public class Round
                 //win, give user bet amount x 2
                 System.out.println("Winner Winner!");
                 party.getPlayer(index).setCurrency(party.getPlayer(index).getCurrency() + 2 * betAmount);
+                dealerHand.clearHand();
+                playerHand.clearHand();
             } 
             
             else if(playerHand.getScore() == dealerHand.getScore())
@@ -215,11 +221,15 @@ public class Round
                 //push, give bet amount back to user
                 party.getPlayer(index).setCurrency(party.getPlayer(index).getCurrency() + betAmount);
                 System.out.println("Push!");
+                dealerHand.clearHand();
+                playerHand.clearHand();
             } 
             else 
             {
                 //loss
                 System.out.println("You lost... :(");
+                dealerHand.clearHand();
+                playerHand.clearHand();
                 return;
             }
         }

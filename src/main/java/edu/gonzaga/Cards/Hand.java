@@ -32,6 +32,12 @@ public class Hand extends Collection
         return (getScore() > 21);
     }
 
+    public void clearHand(){
+        for(int i = 0; i < getSize(); i++){
+            remCard(i);
+        }
+    }
+
 
     @Override
     public void printFancy()
