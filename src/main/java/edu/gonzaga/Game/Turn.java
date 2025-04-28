@@ -66,11 +66,13 @@ public class Turn
     public void play()
     {
         
-        hand.popDeck(deck);
-        hand.popDeck(deck);
+        
 
         do
         {
+            hand.popDeck(deck);
+            hand.popDeck(deck);
+            
             displayStats();
 
             // Decide if to take another cards

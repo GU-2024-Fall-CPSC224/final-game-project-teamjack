@@ -22,6 +22,7 @@ public class Dealer {
 
     }
 
+
     // Should call hit at the end of rounds, dealer will keep hitting
     // until their hand has a value greater than or equal to 17
     public void hit(Deck deck){
