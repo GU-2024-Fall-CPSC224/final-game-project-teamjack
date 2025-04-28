@@ -191,7 +191,14 @@ public class Round
             playerHand.clearHand();
             return;
         }
-    
+
+        if(dealerHand.getScore() > 21 && playerHand.getScore() <= 21){
+            System.out.println("Dealer busts, you win!");
+            party.getPlayer(index).setCurrency(party.getPlayer(index).getCurrency() + 2 * betAmount);
+            dealerHand.clearHand();
+            playerHand.clearHand();
+        }
+
         if(playerHand.hasBlackJack())
         {
             System.out.println("Blackjack!");
