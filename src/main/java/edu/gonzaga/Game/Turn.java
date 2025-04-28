@@ -180,7 +180,7 @@ public class Turn
 
     public void dealerBust(){
         System.out.println("Dealer busts! you win!");
-        turnscore = hand.getScore();
+        turnScore = hand.getScore();
         going = false;  
     }
 
