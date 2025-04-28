@@ -64,7 +64,7 @@ public class Round
         createPartyBets();
 
         // Gives dealer cards and displays one
-        getDealerCards();
+        giveDealerCards();
         displayDealerCards(1);
 
         // Start of player's turn after bet
@@ -83,14 +83,10 @@ public class Round
             party.displayAllScores();
         }
 
-        // BELOW NEEDS TO BE DONE
         // Dealer reveals second card
-        // If below 17, then dealer hits
-        // Determine whether list of players who stood win
+        updateDealerCards();
 
-        // Update currency
-
-        comparePartyCards();
+        comparePartyBets();
 
     }
 
@@ -108,31 +104,75 @@ public class Round
         betList.add(bet);
     }
 
-    private void getDealerCards()
+    private void giveDealerCards()
     {
         Hand dealerHand = party.getDealer().getHand();
         dealerHand.popDeck(deck);
         dealerHand.popDeck(deck);
     }
+
+    private void updateDealerCards()
+    {
+
+        System.out.println("");
+        System.out.println("The dealer's full hull hand shall now be shown");
+        displayDealerCards();
+
+        if (dealerMustDraw())
+            dealerDraw();
+
+        System.out.println("");
+        System.out.println("Dealer's Score: " + party.getDealer().getHand().getScore());
+    }
+
+
+
+    private void displayDealerCards()
+        {displayDealerCards(party.getDealer().getHand().getSize());}
 
     private void displayDealerCards(int num)
     {
         Hand dealerHand = party.getDealer().getHand();
         
         System.out.println("Dealer's Hand:");
-        for (int index = 0 ; (index < num) && (index < dealerHand.getSize()) ; index++)
-            // Gets the string representation of the dealer's indexed card
-            System.out.println(dealerHand.getCard(index).getString());
+        dealerHand.printFancy();
     }
+
+
+
+    private boolean dealerMustDraw()
+        {return (party.getDealer().getHand().getScore() < 17) ;}
+
+
+    
+    private void dealerDraw()
+    {
+        Hand dealerHand = party.getDealer().getHand();
+
+        while (dealerHand.getScore() < 17)
+        {
+            System.out.println("The dealer is drawing a card...");
+            dealerHand.popDeck(deck);
+            System.out.println("The card is a " + dealerHand.peekTail().getString());
+        }
+
+        System.out.println("");
+        System.out.println("The dealer's hand has been updated!");
+        displayDealerCards();
+        System.out.println("");
+    }
+
+
 
     //win condition including aces here:
-    private void comparePartyCards()
+    private void comparePartyBets()
     {
-        for(int index = 0; index < party.size() - 1 ; index++)
-            comparePlayerCards(index);
+        System.out.println("Now we will see who won their bets...");
+        for(int index = 0; index < party.size() ; index++)
+            comparePlayerBets(index);
     }
 
-    private void comparePlayerCards(int index)
+    private void comparePlayerBets(int index)
     {
         // Grabs the hand of the dealer
         Hand dealerHand = party.getDealer().getHand();
@@ -141,6 +181,7 @@ public class Round
         Hand playerHand = party.getPlayer(index).getHand();
         int betAmount = betList.get(index).getBetAmount();
 
+        System.out.println("");
         // Below checks if the player wins
 
         if(dealerHand.hasBlackJack() && !playerHand.hasBlackJack())
@@ -178,7 +219,7 @@ public class Round
             else 
             {
                 //loss
-                System.out.println("You lost...");
+                System.out.println("You lost... :(");
                 return;
             }
         }

@@ -38,19 +38,25 @@ public class Collection
         return tmp;
     }
 
-    public Card peek()
+    public Card peekHead()
         {return getCard(0);}
+
+    public Card peekTail()
+        {return getCard(list.size() - 1);}
 
     public int getSize(){
         return list.size();
     }
-    public void print(){
-        Card newCard = new Card();
 
-        for(int i = 0; i < list.size(); ++i){
-            newCard = getCard(i);
-            newCard.print();
-        }
-        // System.out.println();
+    public void print()
+    {
+        for(int i = 0 ; i < getSize() ; ++i)
+            System.out.println(getCard(i).getString());
+    }
+
+    public void printFancy()
+    {
+        for(int i = 0 ; i < getSize() ; ++i)
+            System.out.println("| " + getCard(i).getString());
     }
 }

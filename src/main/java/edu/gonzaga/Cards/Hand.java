@@ -31,4 +31,14 @@ public class Hand extends Collection
     {
         return (getScore() > 21);
     }
+
+
+    @Override
+    public void printFancy()
+    {
+        for(int i = 0 ; i < getSize() ; ++i)
+            System.out.println("| " + getCard(i).getString());
+
+        System.out.println("Total:\t" + getScore());
+    }
 }

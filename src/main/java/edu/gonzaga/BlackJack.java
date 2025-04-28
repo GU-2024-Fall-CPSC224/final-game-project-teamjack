@@ -60,7 +60,7 @@ public class BlackJack
 
     public void play()
     {
-        for (int index = 0 ; index < party.size() ; index++)
+        for (int index = 0 ; index < 4 ; index++)
         {
             Round curRound = new Round(party, index, deck);
             curRound.play();

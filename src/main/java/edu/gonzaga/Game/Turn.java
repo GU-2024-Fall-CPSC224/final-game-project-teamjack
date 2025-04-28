@@ -95,12 +95,9 @@ public class Turn
     {
         System.out.println("");
         System.out.println(user.getName() + "'s Hand: ");
-        // Loops through each card to print
-        for (int index = 0 ; index < hand.getSize() ; index++)
-            System.out.println("| " + hand.getCard(index).getString());
+        hand.printFancy();
 
-        System.out.println("Total:\t" + hand.getScore());
-        System.out.println("Dealer:\t" + dealer.getHand().peek().getValue() + " (based on theonly seen card)");
+        System.out.println("Dealer:\t" + dealer.getHand().peekHead().getValue() + " (based on the only seen card)");
         System.out.println("");
     }
 
