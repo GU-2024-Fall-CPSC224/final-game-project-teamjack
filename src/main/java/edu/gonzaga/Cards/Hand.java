@@ -33,7 +33,7 @@ public class Hand extends Collection
     }
 
     public void clearHand(){
-        for(int i = 0; i < getSize() + 1; i++){
+        for(int i = 0; i <= getSize(); i++){
             remCard(i);
         }
     }
