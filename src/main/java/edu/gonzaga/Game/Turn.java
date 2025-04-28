@@ -145,6 +145,7 @@ public class Turn
             System.out.println("Double!!");
             hand.popDeck(deck);
             System.out.println(hand.getCard(hand.getSize() - 1).getString());
+            going = false;
         }
     }
 
