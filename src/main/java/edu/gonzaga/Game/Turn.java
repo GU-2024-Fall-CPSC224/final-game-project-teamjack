@@ -13,10 +13,6 @@ public class Turn
     // Indicates if turn is still active
     private Boolean going; 
 
-    // Represents user's total score during turn 
-    // Not uploaded to user's private score until turn ends without farkle
-    private int turnScore; 
-
     // User performing their turn in turn
     private Player user;
     private Dealer dealer;
@@ -37,7 +33,6 @@ public class Turn
         this.deck = deck;
         this.going = true;
         this.hand = user.getHand();
-        this.turnScore = 0;
 
         System.out.println("");
         System.out.println("---------------------------");
@@ -51,11 +46,8 @@ public class Turn
     */
     public void end()
     {
-        // Updates user's score
-        user.setScore(turnScore);
-
         System.out.println("");
-        System.out.println(user.getName() + " ended their turn with " + user.getScore() + " points");
+        System.out.println(user.getName() + " ended their turn with");
         System.out.println("");
     }
 
@@ -85,9 +77,6 @@ public class Turn
                 bustProtocol();
             
         } while (going == true);
-        
-        if ( hand.bust() == false)
-            turnScore = hand.getScore();
         
     }
 
@@ -145,6 +134,7 @@ public class Turn
             System.out.println("Double!!");
             hand.popDeck(deck);
             System.out.println(hand.getCard(hand.getSize() - 1).getString());
+            // ** ADD DOUBLE THE BET FEATURE
         }
     }
 
@@ -152,7 +142,6 @@ public class Turn
     {
         // **Improve bust message
         System.out.println("Bust!");
-        turnScore = 0;
         going = false;
     }
 
