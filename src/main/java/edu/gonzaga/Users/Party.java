@@ -40,15 +40,15 @@ public class Party
     {
         for (int index = 0 ; index < size() ; index++)
         {
-            System.out.println(getPlayerName(index) + ":  " + getPlayerScore(index) + " points");
+            System.out.println(getPlayerName(index) + ":  " + getPlayerCurrency(index) + " points");
         }
     }
 
     // getters for private attributes
     public Player getPlayer(int index)
         {return list.get(index);}
-    public int getPlayerScore(int index)
-        {return list.get(index).getScore();}
+    public int getPlayerCurrency(int index)
+        {return list.get(index).getCurrency();}
     public String getPlayerName(int index)
         {return list.get(index).getName();}
     public Dealer getDealer()
