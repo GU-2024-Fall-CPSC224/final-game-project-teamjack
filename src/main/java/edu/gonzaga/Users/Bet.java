@@ -145,7 +145,104 @@ public class Bet{
     public int getBetAmount()
         {return betAmount;}
 
+
+    public void close(String comparison)
+    {
+
+        String name = player.getName();
+
+        compareMessage1();
+
+        // Below checks if the player wins
+        if (comparison == "Bust1")
+        {
+            System.out.println(name + ", you busted! You lost this round");
+            lose();
+        }
+
+        if (comparison == "Bust2")
+        {
+            System.out.println("The dealer busted! " + name + " wins!");
+            win();
+        }
+
+        if (comparison == "Push")
+        {
+            System.out.println(name + " tied with the dealer!");
+            System.out.println("You did not lose any money this round");
+            push();
+        }
+
+        if (comparison == "Blackjack2")
+        {
+            System.out.println("The dealer got a blackjack! " + name + " lost this round");
+            lose();
+        }
+
+        if (comparison == "Blackjack1")
+        {
+            System.out.println(name + " got a blackjack! You win this round!!");
+            win();
+        }
+
+        if (comparison == "Win1")
+        {
+            System.out.println(name + " won against the dealer!");
+            win();
+        }
+
+        if (comparison == "Win2")
+        {
+            System.out.println(name + " lost against the dealer!");
+            lose();
+        }
+
+
+        compareMessage2();
+
+ 
+    }
+
+    private void win()
+    {
+        player.setCurrency( player.getCurrency() + (2 * betAmount) );
+    }
+
+    private void push()
+    {
+        player.setCurrency( player.getCurrency() + (betAmount) );
+    }
+
+    private void lose()
+    {
+        System.out.println(":(");
+    }
+
+    private void compareMessage1()
+    {
+        System.out.println("");
+        System.out.println("-------------------------");
+        System.out.println("");
+        System.out.println("Let's see how " + player.getName() + " did...");
+        System.out.println("Press enter to continue");
+        System.out.println("");
+        Interface.promptUser();
+        System.out.println("");
+    }
+
+    private void compareMessage2()
+    {
+        System.out.println(player.getName() + "'s new balance: " + player.getCurrency());
+        System.out.println("");
+        System.out.println("Press enter to continue");
+        System.out.println("");
+        Interface.promptUser();
+        System.out.println("");
+    }
+
 }
+
+
 
 
 /* NOTE: THIS WILL BE MOVED TO A DIFFERENT CLASS OR NEW ONE ENTIRELY. FEEL FREE TO ADJUST THIS OR REMAKE IT ENTIRELY.
