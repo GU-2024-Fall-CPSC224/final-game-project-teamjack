@@ -47,11 +47,4 @@ public class Hand extends Collection
 
         System.out.println("Total:\t" + getScore());
     }
-
-
-    public void returnHandToDeck(Deck deck)
-    {
-        while (getSize() > 0)
-            deck.addCard(pop());
-    }
 }

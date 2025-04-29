@@ -52,8 +52,6 @@ public class Round
         System.out.println("The round has ended!");
         System.out.println("");
 
-        deck.shuffle();
-
     }
 
 
@@ -82,6 +80,7 @@ public class Round
             // Perform and then end the turn
             curTurn.play();
             curTurn.end();
+            party.displayAllScores();
         }
 
         // Dealer reveals second card
@@ -129,15 +128,14 @@ public class Round
 
 
     private void displayDealerCards()
-        {party.getDealer().getHand().printFancy();}
+        {displayDealerCards(party.getDealer().getHand().getSize());}
 
     private void displayDealerCards(int num)
     {
         Hand dealerHand = party.getDealer().getHand();
         
         System.out.println("Dealer's Hand:");
-        for (int index = 0 ; index < num ; index++)
-            System.out.println("| " + dealerHand.getCard(index).getString());
+        dealerHand.printFancy();
     }
 
 
@@ -169,29 +167,22 @@ public class Round
     //win condition including aces here:
     private void comparePartyBets()
     {
-        System.out.println("");
-        System.out.println("Everyone's bets:");
-        party.displayAllBets(betList);
-        System.out.println("");
-
         System.out.println("Now we will see who won their bets...");
         for(int index = 0; index < party.size() ; index++)
             comparePlayerBets(index);
-
-        party.getDealer().getHand().returnHandToDeck(deck);
     }
 
     private void comparePlayerBets(int index)
     {
-        Hand playerHand = party.getPlayer(index).getHand();
+        // Grabs the hand of the dealer
         Hand dealerHand = party.getDealer().getHand();
-        Bet bet = betList.get(index);
+        
+        // Grabs player's hand and their bet amount
+        Hand playerHand = party.getPlayer(index).getHand();
+        int betAmount = betList.get(index).getBetAmount();
 
-        String comparison = Scoresheet.compare(playerHand, dealerHand);
-
-        bet.close(comparison);
-
-        playerHand.returnHandToDeck(deck);
+        System.out.println("");
+        // Below checks if the player wins
 
         if(dealerHand.hasBlackJack() && !playerHand.hasBlackJack())
         {

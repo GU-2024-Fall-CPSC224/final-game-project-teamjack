@@ -36,19 +36,19 @@ public class Party
     }
 
 
-    public void displayAllBets(ArrayList<Bet> betList)
+    public void displayAllScores()
     {
         for (int index = 0 ; index < size() ; index++)
         {
-            System.out.println("| " + getPlayerName(index) + " with " + "$" + getPlayerCurrency(index) + " and betting $" + betList.get(index).getBetAmount());
+            System.out.println(getPlayerName(index) + ":  " + getPlayerScore(index) + " points");
         }
     }
 
     // getters for private attributes
     public Player getPlayer(int index)
         {return list.get(index);}
-    public int getPlayerCurrency(int index)
-        {return list.get(index).getCurrency();}
+    public int getPlayerScore(int index)
+        {return list.get(index).getScore();}
     public String getPlayerName(int index)
         {return list.get(index).getName();}
     public Dealer getDealer()
