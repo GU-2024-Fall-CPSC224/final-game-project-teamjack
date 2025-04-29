@@ -11,9 +11,6 @@ public class Player
     // Used to identify Player in terminal by something other than index
     private String name;
 
-    // Score of Player. Updated after each round performed
-    private int score;
-
     // Index of Player
     private int index; 
 
@@ -29,7 +26,6 @@ public class Player
     public Player(int num)
     {
         currency = 1000;
-        score = 0;
         index = num;
         name = "Unknown Player";
         hand = new Hand();
@@ -88,10 +84,6 @@ public class Player
     public void setName(String inName) 
         {name = inName;}
 
-    /** score variable setter */
-    public void setScore(int inScore) 
-        {score = inScore;}
-
     // currency variable setter 
     public void setCurrency(int inCurrency){
         currency = inCurrency;
@@ -108,12 +100,6 @@ public class Player
     */
     public String getName() 
         {return name;}
-
-    /** score variable getter
-     * @return Score of Player
-    */
-    public int getScore() 
-        {return score;}
 
     public Hand getHand() 
         {return hand;}

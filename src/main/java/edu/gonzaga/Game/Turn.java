@@ -51,11 +51,8 @@ public class Turn
     */
     public void end()
     {
-        // Updates user's score
-        user.setScore(turnScore);
-
         System.out.println("");
-        System.out.println(user.getName() + " ended their turn with " + user.getScore() + " points");
+        System.out.println(user.getName() + " ended their turn");
         System.out.println("");
     }
 
