@@ -137,6 +137,8 @@ public class Turn
         {
             System.out.println("Double!!");
             hand.popDeck(deck);
+            user.setCurrency(user.getCurrency() - bet.getBetAmount());
+            bet.setBetAmount(bet.getBetAmount() * 2);
             System.out.println(hand.getCard(hand.getSize() - 1).getString());
             going = false;
         }
