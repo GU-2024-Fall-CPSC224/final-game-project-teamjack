@@ -30,7 +30,7 @@ public class Round
     * 
     *  @param  inUser Player set to be playing this round
     */
-    public Round(Party party, int numRound, Deck deck)
+    public Round(Party party, int numRound)
     {
         this.party = party;
         this.numRound = numRound;
@@ -50,6 +50,12 @@ public class Round
     {
         System.out.println("");
         System.out.println("The round has ended!");
+        System.out.println("");
+
+        party.displayAllScores();
+
+        System.out.println("Press enter to continue...");
+        Interface.promptUser();
         System.out.println("");
 
     }
@@ -170,6 +176,8 @@ public class Round
         System.out.println("Now we will see who won their bets...");
         for(int index = 0; index < party.size() ; index++)
             comparePlayerBets(index);
+
+        party.getDealer().getHand().clearHand();
     }
 
     private void comparePlayerBets(int index)
@@ -187,23 +195,20 @@ public class Round
         if(dealerHand.hasBlackJack() && !playerHand.hasBlackJack())
         {
             System.out.println("Dealer has blackjack, you lose");
-            dealerHand.clearHand();
-            playerHand.clearHand();
-            return;
         }
 
 
-        if(playerHand.hasBlackJack())
+        else if(playerHand.hasBlackJack())
         {
-            System.out.println("Blackjack!");
+            System.out.println(party.getPlayerName(index) + ", you got a blackjack!");
             if(dealerHand.hasBlackJack())
             {
-                System.out.println("Unlucky! It's a push.");
+                System.out.println(party.getPlayerName(index) + ", you are unlucky! It's a push.");
                 // give bet amount back to user
                 party.getPlayer(index).setCurrency(party.getPlayer(index).getCurrency() + betAmount);
-                dealerHand.clearHand();
-                playerHand.clearHand();
             } 
+            else
+                party.getPlayer(index).setCurrency(party.getPlayer(index).getCurrency() + betAmount + (betAmount * 3 / 2) );
         }
         
         else
@@ -211,34 +216,26 @@ public class Round
             if(playerHand.getScore() > dealerHand.getScore() && playerHand.getScore() <= 21)
             {
                 //win, give user bet amount x 2
-                System.out.println("Winner Winner!");
+                System.out.println(party.getPlayerName(index) + " is a winner winner chicken dinner!");
                 party.getPlayer(index).setCurrency(party.getPlayer(index).getCurrency() + 2 * betAmount);
-                dealerHand.clearHand();
-                playerHand.clearHand();
             } 
             
             else if(playerHand.getScore() == dealerHand.getScore() && playerHand.getScore() <= 21)
             {
                 //push, give bet amount back to user
                 party.getPlayer(index).setCurrency(party.getPlayer(index).getCurrency() + betAmount);
-                System.out.println("Push!");
-                dealerHand.clearHand();
-                playerHand.clearHand();
+                System.out.println(party.getPlayerName(index) + ", you pushed!");
             }
             else if(dealerHand.getScore() > 21 && playerHand.getScore() <= 21){
-                System.out.println("Dealer busts, you win!");
+                System.out.println("Dealer busts, " + party.getPlayerName(index) + " won in this round!");
                 party.getPlayer(index).setCurrency(party.getPlayer(index).getCurrency() + 2 * betAmount);
-                dealerHand.clearHand();
-                playerHand.clearHand();
             }
             else{
                 //loss
-                System.out.println("You lost... :(");
-                dealerHand.clearHand();
-                playerHand.clearHand();
-                return;
+                System.out.println(party.getPlayerName(index) + " lost this round... :(");
             }
         }
+        playerHand.clearHand();
     }
 
 }

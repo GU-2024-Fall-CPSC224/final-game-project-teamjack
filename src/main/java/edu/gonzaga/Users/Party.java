@@ -40,7 +40,7 @@ public class Party
     {
         for (int index = 0 ; index < size() ; index++)
         {
-            System.out.println(getPlayerName(index) + ":  " + getPlayerCurrency(index) + " points");
+            System.out.println(getPlayerName(index) + "'s balance':  " + getPlayerCurrency(index) + " ");
         }
     }
 

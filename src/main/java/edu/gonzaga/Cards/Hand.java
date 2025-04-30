@@ -32,8 +32,10 @@ public class Hand extends Collection
         return (getScore() > 21);
     }
 
-    public void clearHand(){
-        while(getSize() > 0){
+    public void clearHand()
+    {
+        while(getSize() > 0)
+        {
             remCard(0);
         }
     }

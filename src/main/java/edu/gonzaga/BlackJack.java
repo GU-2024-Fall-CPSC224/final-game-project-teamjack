@@ -15,7 +15,6 @@
  */
 package edu.gonzaga;
 
-import edu.gonzaga.Cards.Deck;
 import edu.gonzaga.Game.Interface;
 import edu.gonzaga.Game.Round;
 import edu.gonzaga.Users.Party;
@@ -25,7 +24,6 @@ import edu.gonzaga.Users.Party;
 public class BlackJack 
 {
     private Party party;
-    private Deck deck;
 
     public static void main(String[] args) 
     {
@@ -43,7 +41,6 @@ public class BlackJack
 
     public BlackJack()
     {
-        this.deck = new Deck();
     }
 
     public void prepare()
@@ -55,15 +52,15 @@ public class BlackJack
         String partySize = Interface.promptUser();
         int size = Integer.parseInt(partySize);
         party = new Party(size);
-        party.displayAllScores();
     }
 
     public void play()
     {
         for (int index = 1 ; index < 5 ; index++)
         {
-            Round curRound = new Round(party, index, deck);
+            Round curRound = new Round(party, index);
             curRound.play();
+            curRound.end();
         }
     }
 
