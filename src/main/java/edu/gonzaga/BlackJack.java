@@ -51,7 +51,7 @@ public class BlackJack
         // Get size of party
         System.out.println("Welcome to Blackjack!");
         System.out.println();
-        System.out.println("How many players would yoou like to play with?");
+        System.out.println("How many players would you like to play with?");
         String partySize = Interface.promptUser();
         int size = Integer.parseInt(partySize);
         party = new Party(size);
