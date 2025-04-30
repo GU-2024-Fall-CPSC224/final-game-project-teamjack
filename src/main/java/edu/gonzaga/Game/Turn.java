@@ -135,12 +135,16 @@ public class Turn
         // 'double' doubles the bet and 'hits' only once, ending action
         if(actionValue == 3)
         {
-            System.out.println("Double!!");
-            hand.popDeck(deck);
-            user.setCurrency(user.getCurrency() - bet.getBetAmount());
-            bet.setBetAmount(bet.getBetAmount() * 2);
-            System.out.println(hand.getCard(hand.getSize() - 1).getString());
-            going = false;
+            if(user.getCurrency() >= bet.getBetAmount()){
+                System.out.println("Double!!");
+                hand.popDeck(deck);
+                user.setCurrency(user.getCurrency() - bet.getBetAmount());
+                bet.setBetAmount(bet.getBetAmount() * 2);
+                System.out.println(hand.getCard(hand.getSize() - 1).getString());
+                going = false;
+            } else {
+                System.out.println("Insufficient funds to double!");
+            }
         }
     }
 
