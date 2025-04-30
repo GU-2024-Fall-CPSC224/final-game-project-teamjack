@@ -1,6 +1,5 @@
 package edu.gonzaga.Users;
 
-import edu.gonzaga.Cards.Hand;
 import edu.gonzaga.Game.Interface;
 
 /*
@@ -15,9 +14,6 @@ public class Bet{
     //Want the current player's info.
     private Player player;
 
-    //Want current hand info
-    private Hand currentHand;
-
     //Current Bet amount, default is set to 0
     private int betAmount;
 
@@ -28,8 +24,6 @@ public class Bet{
     public Bet(Player player)
     {
         this.player = player;
-        this.currentHand = player.getHand();
-
         this.betAmount = 0;
     }
 
@@ -73,7 +67,7 @@ public class Bet{
             // Prompts for action
             System.out.println("");
             char input = Interface.promptUser().charAt(0);
-            int betChoice = Character.toUpperCase(input) - 65;
+            char betChoice = Character.toUpperCase(input);
 
             // Sets bet amount
             betAmount = getBetNum(betChoice);

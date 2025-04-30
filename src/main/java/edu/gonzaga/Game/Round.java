@@ -134,14 +134,16 @@ public class Round
 
 
     private void displayDealerCards()
-        {displayDealerCards(party.getDealer().getHand().getSize());}
+    {
+        System.out.println("Dealer's Hand:");
+        party.getDealer().getHand().printFancy();
+    }
 
     private void displayDealerCards(int num)
-    {
-        Hand dealerHand = party.getDealer().getHand();
-        
+    {        
         System.out.println("Dealer's Hand:");
-        dealerHand.printFancy();
+        party.getDealer().getHand().printFancy(num);
+        System.out.println("(Based on the first " + Integer.toString(num) + " cards revealed)");
     }
 
 

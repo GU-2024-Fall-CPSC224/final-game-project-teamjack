@@ -15,8 +15,13 @@ public class Hand extends Collection
 
     public int getScore()
     {
+        return getScore(getSize());
+    }
+
+    public int getScore(int num)
+    {
         int score = 0;
-        for(int i = 0; i < getSize(); ++i)
+        for(int i = 0; i < num; ++i)
             score += getCard(i).getValue();
         
         return score;
@@ -48,5 +53,13 @@ public class Hand extends Collection
             System.out.println("| " + getCard(i).getString());
 
         System.out.println("Total:\t" + getScore());
+    }
+
+    public void printFancy(int num)
+    {
+        for(int i = 0 ; (i < num) && (i < getSize()) ; ++i )
+            System.out.println("| " + getCard(i).getString());
+
+        System.out.println("Total:\t" + getScore(num));
     }
 }
