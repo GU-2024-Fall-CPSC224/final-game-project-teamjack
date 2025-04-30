@@ -48,9 +48,7 @@ public class BlackJack
         // Get size of party
         System.out.println("Welcome to Blackjack!");
         System.out.println();
-        System.out.println("How many players would you like to play with?");
-        String partySize = Interface.promptUser();
-        int size = Integer.parseInt(partySize);
+        int size = promptPartySize(); 
         party = new Party(size);
     }
 
@@ -62,6 +60,23 @@ public class BlackJack
             curRound.play();
             curRound.end();
         }
+    }
+
+    private int promptPartySize()
+    {
+        int input = 0;
+        while (input <= 0)
+        {
+            System.out.println("How many players would you like to play with?");
+            input = Interface.promptUserInt();
+            if (input > 8)
+            {
+                System.out.println("Error! You can only have up to 8 players");
+                input = 0;
+            }
+            System.out.println("");
+        }
+        return input;
     }
 
 }

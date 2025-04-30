@@ -66,7 +66,7 @@ public class Bet{
 
             // Prompts for action
             System.out.println("");
-            char input = Interface.promptUser().charAt(0);
+            char input = promptCharInput();
             char betChoice = Character.toUpperCase(input);
 
             // Sets bet amount
@@ -141,5 +141,16 @@ public class Bet{
 
     public void setBetAmount(int num)
         {betAmount = num;}
+
+
+    private char promptCharInput()
+    {
+        String sinput = Interface.promptUser();
+        char cinput = 0;
+        if (sinput.length() > 0)
+            cinput = sinput.charAt(0);
+        
+        return cinput;
+    }
 
 }
