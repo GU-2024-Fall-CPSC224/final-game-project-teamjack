@@ -81,7 +81,8 @@ public class Round
             (
                 party.getPlayer(index), 
                 party.getDealer(),
-                deck
+                deck,
+                betList.get(index)
             );
             // Perform and then end the turn
             curTurn.play();

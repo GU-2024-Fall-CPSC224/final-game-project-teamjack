@@ -139,4 +139,7 @@ public class Bet{
     public int getBetAmount()
         {return betAmount;}
 
+    public void setBetAmount(int num)
+        {betAmount = num;}
+
 }

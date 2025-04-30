@@ -3,6 +3,7 @@ package edu.gonzaga.Game;
 
 import edu.gonzaga.Users.Player;
 import edu.gonzaga.Users.Dealer;
+import edu.gonzaga.Users.Bet;
 import edu.gonzaga.Cards.*;
 
 /** Manages a single turn for an individual player 
@@ -13,13 +14,11 @@ public class Turn
     // Indicates if turn is still active
     private Boolean going; 
 
-    // Represents user's total score during turn 
-    // Not uploaded to user's private score until turn ends without farkle
-    private int turnScore; 
-
     // User performing their turn in turn
     private Player user;
     private Dealer dealer;
+
+    private Bet bet;
 
     // Stores card stuff
     Hand hand; // Player's individual collection of cards during their turn
@@ -30,14 +29,14 @@ public class Turn
      * 
      *  @param  inUser Player set to be playing this turn
      */
-    public Turn(Player user, Dealer dealer, Deck deck) 
+    public Turn(Player user, Dealer dealer, Deck deck, Bet bet) 
     {
         this.user = user;
         this.dealer = dealer;
         this.deck = deck;
         this.going = true;
         this.hand = user.getHand();
-        this.turnScore = 0;
+        this.bet = bet;
 
         System.out.println("");
         System.out.println("---------------------------");
@@ -82,10 +81,7 @@ public class Turn
                 bustProtocol();
             
         } while (going == true);
-        
-        if ( hand.bust() == false)
-            turnScore = hand.getScore();
-        
+                
     }
 
     private void displayStats()
@@ -150,7 +146,6 @@ public class Turn
     {
         // **Improve bust message
         System.out.println("Bust!");
-        turnScore = 0;
         going = false;
     }
 
