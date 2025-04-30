@@ -1,6 +1,5 @@
 package edu.gonzaga.Cards;
 
-import edu.gonzaga.Cards.Suits.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
@@ -29,7 +28,6 @@ public class CardTest
     {
         Card example = new Card(2, 2);
         System.out.println(example.getString());
-        System.out.println(example.getValue());
         assertEquals(example.getCardType(), example.getCardType());
     }
 
