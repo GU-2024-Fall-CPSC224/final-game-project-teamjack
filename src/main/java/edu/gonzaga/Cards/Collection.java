@@ -13,7 +13,7 @@ public class Collection
         list = new ArrayList<Card>();
     }
 
-    ArrayList<Card> getList()
+    public ArrayList<Card> getList()
         {return list;}
 
     public void addCard(Card card){
