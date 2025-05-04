@@ -18,6 +18,12 @@ public class Hand extends Collection
         return getScore(getSize());
     }
 
+    /** A way to show the score based on only the first n cards revealed in a hand
+     *  Used for the dealer
+     * 
+     * @param num
+     * @return score of the first n cards found
+     */
     public int getScore(int num)
     {
         int score = 0;
