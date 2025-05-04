@@ -19,9 +19,7 @@ public class Collection
     public void addCard(Card card){
         list.add(card);
     }
-    public void addCard(int index){
-        
-    }
+
     public void remCard(Card card){
         list.remove(card);
     }
