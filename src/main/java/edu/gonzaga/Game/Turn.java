@@ -21,8 +21,8 @@ public class Turn
     private Bet bet;
 
     // Stores card stuff
-    Hand hand; // Player's individual collection of cards during their turn
-    Deck deck; // Overall deck used in the game
+    private Hand hand; // Player's individual collection of cards during their turn
+    private Deck deck; // Overall deck used in the game
 
     /** Constructor function creates new turn for
      *  inputted user
