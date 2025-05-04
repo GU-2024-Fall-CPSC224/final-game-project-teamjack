@@ -34,7 +34,7 @@ public class Bet{
 
         if (!canBet())
         {
-            System.out.println("You do not have enough money for this bet!");
+            System.out.println(player.getName() + ", you do not have enough money to make a bet! Your turn will be skipped");
             betAmount = 0;
             return;
         }

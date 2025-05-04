@@ -76,18 +76,12 @@ public class Round
         // Start of player's turn after bet
         for (int index = 0 ; index < party.size() ; index++)
         {
-            // Initialize a turn for a particular player
-            Turn curTurn = new Turn
-            (
-                party.getPlayer(index), 
-                party.getDealer(),
-                deck,
-                betList.get(index)
-            );
-            // Perform and then end the turn
-            curTurn.play();
-            curTurn.end();
-            party.displayAllScores();
+            if (betList.get(index).getBetAmount() > 0)
+                performTurn(index);
+
+            // For the people who have
+            else
+                System.out.println(party.getPlayerName(index) + ", you did not bet! Your turn has been skipped");
         }
 
         // Dealer reveals second card
@@ -95,6 +89,22 @@ public class Round
 
         comparePartyBets();
 
+    }
+
+    private void performTurn(int index)
+    {
+        // Initialize a turn for a particular player
+        Turn curTurn = new Turn
+        (
+            party.getPlayer(index), 
+            party.getDealer(),
+            deck,
+            betList.get(index)
+        );
+        // Perform and then end the turn
+        curTurn.play();
+        curTurn.end();
+        party.displayAllScores();
     }
 
     private void createPartyBets()
