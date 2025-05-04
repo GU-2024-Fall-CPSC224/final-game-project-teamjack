@@ -83,18 +83,6 @@ public class Card
     public String getCardType(){
         return cardType;
     }
-    private void setCardType(String cardType){
-        this.cardType = cardType;
-    }
-    private void setSuit(Suit suit){
-        this.suit = suit;
-    }
-    private void setValue(int value){
-        this.value = value;
-    }
-    public void print(){
-        System.out.println(getValue() + " of " + suit.getName());
-    }
     public String getString(){
         return (getValue() + " of " + suit.getName());
     }

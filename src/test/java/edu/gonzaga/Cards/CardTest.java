@@ -9,7 +9,7 @@ public class CardTest
     void testRandomCardPrint()
     {
         Card example = new Card();
-        example.print();
+        System.out.println(example.getString());
         assertEquals(example.getCardType(), example.getCardType());
         
     }
