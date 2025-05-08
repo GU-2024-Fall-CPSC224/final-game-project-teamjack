@@ -8,7 +8,7 @@ public class Deck extends Collection
     public Deck()
     {
         super();
-
+        // Adds all 52 cards to deck
         for (int suit = 1 ; suit < 5 ; suit++)
         {
             for (int val = 1 ; val < 14 ; val++)
@@ -22,6 +22,7 @@ public class Deck extends Collection
 
     }
 
+    // Shuffles the deck
     public void shuffle()
     {
         Collections.shuffle(getList());

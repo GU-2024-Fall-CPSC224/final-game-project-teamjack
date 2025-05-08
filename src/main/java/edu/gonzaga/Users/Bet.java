@@ -52,7 +52,7 @@ public class Bet{
         return;
     }
 
-
+    /** Asks player to place a bet */
     private void promptBet()
     {
         int balanceAmount = player.getCurrency();
@@ -83,6 +83,12 @@ public class Bet{
     private int getBetNum(char index)
         {return getBetNum((int)index - 65);}
 
+    /** A getter for how much money is in the bet type depending
+     *  on the index of the bet type list
+     * 
+     * @param index
+     * @return How much money is affiliated to the indexed type
+     */
     private int getBetNum(int index)
     {
         switch (index)
@@ -100,6 +106,7 @@ public class Bet{
         return -1;
     }
 
+    /** If a bet amount has a certain negative number, it displays a corresponding error message */
     private void displayAnyErrors(int betAmount)
     {
         if (betAmount == -1)
@@ -112,6 +119,7 @@ public class Bet{
             System.out.println("Error! You do not have enough money for this bet!");
     }
 
+    /** Prints the list of potential bet options */
     private void displayBetOptions()
     {
         // Prompts player to input an amount
@@ -126,13 +134,10 @@ public class Bet{
     }
 
 
-
+    
     public boolean canBet()
     {
-        if (player.getCurrency() < MIN_BET)
-            return false;
-
-        return true;
+        return (player.getCurrency() >= MIN_BET);
     }
     
 
@@ -143,6 +148,7 @@ public class Bet{
         {betAmount = num;}
 
 
+    /** Getter for a character input from user */
     private char promptCharInput()
     {
         String sinput = Interface.promptUser();

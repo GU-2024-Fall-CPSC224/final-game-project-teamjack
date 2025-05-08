@@ -33,16 +33,25 @@ public class Hand extends Collection
         return score;
     }
 
+    /** Determines if hand has a blackjack
+     * 
+     * @return if hand is a blackjack
+     */
     public boolean hasBlackJack()
     {
         return (getScore() == 21);
     }
 
+    /** Determines if hand is a bust
+     * 
+     * @return If hand is a bust
+     */
     public boolean bust()
     {
         return (getScore() > 21);
     }
 
+    /** Clears the hand */
     public void clearHand()
     {
         while(getSize() > 0)
@@ -52,6 +61,7 @@ public class Hand extends Collection
     }
 
 
+    /** Fancy print function for listing what cards are available */
     @Override
     public void printFancy()
     {
@@ -61,6 +71,7 @@ public class Hand extends Collection
         System.out.println("Total:\t" + getScore());
     }
 
+    /** Prints the first n cards of the hand */
     public void printFancy(int num)
     {
         for(int i = 0 ; (i < num) && (i < getSize()) ; ++i )

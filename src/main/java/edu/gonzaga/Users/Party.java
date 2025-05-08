@@ -35,13 +35,11 @@ public class Party
 
     }
 
-
+    /** Prints all the scores for players */
     public void displayAllScores()
     {
         for (int index = 0 ; index < size() ; index++)
-        {
             System.out.println(getPlayerName(index) + "'s balance':  " + getPlayerCurrency(index) + " ");
-        }
     }
 
     // getters for private attributes

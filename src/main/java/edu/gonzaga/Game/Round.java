@@ -114,6 +114,10 @@ public class Round
             addPlayerBet(party.get(index));
     }
 
+    /** Creates a bet for the inputted user
+     * 
+     * @param user
+     */
     private void addPlayerBet(Player user)
     {
         Bet bet = new Bet(user);
@@ -121,6 +125,7 @@ public class Round
         betList.add(bet);
     }
 
+    /** Gives dealer cards. Intended for start of the round */
     private void giveDealerCards()
     {
         Hand dealerHand = party.getDealer().getHand();
@@ -128,6 +133,7 @@ public class Round
         dealerHand.popDeck(deck);
     }
 
+    /** Reveals dealer's hand and then adds cards if the dealer needs to after everyone does their turn */
     private void updateDealerCards()
     {
 
@@ -143,13 +149,14 @@ public class Round
     }
 
 
-
+    /** Prints dealer's full hand */
     private void displayDealerCards()
     {
         System.out.println("Dealer's Hand:");
         party.getDealer().getHand().printFancy();
     }
 
+    /** Prints first n cards in dealer's hand */
     private void displayDealerCards(int num)
     {        
         System.out.println("Dealer's Hand:");
@@ -158,12 +165,12 @@ public class Round
     }
 
 
-
+    /** Determines if dealer needs to draw */
     private boolean dealerMustDraw()
         {return (party.getDealer().getHand().getScore() < 17) ;}
 
 
-    
+    /** Performs action to add cards to dealer's hand */
     private void dealerDraw()
     {
         Hand dealerHand = party.getDealer().getHand();

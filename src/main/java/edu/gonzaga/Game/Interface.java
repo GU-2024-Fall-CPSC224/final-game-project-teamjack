@@ -43,7 +43,12 @@ public class Interface
         return in.nextLine();
     }
 
-    
+    /** Prompts user to select an integer and
+     *  appropriately responds to cases where
+     *  there is an invalid input by returning -1
+     * 
+     * @return int value that user chose
+     */
     public static int promptUserInt()
     {
         String userInput = promptUser();

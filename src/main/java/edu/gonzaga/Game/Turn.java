@@ -84,6 +84,7 @@ public class Turn
                 
     }
 
+    /** Prints stats relevant to the turn such as dealer and player cards */
     private void displayStats()
     {
         System.out.println("");
@@ -94,6 +95,10 @@ public class Turn
         System.out.println("");
     }
 
+    /** Prompts the player to do an action
+     * 
+     * @return An action represented by a character
+     */
     private int promptAction()
     {
         int actionValue = 0;
@@ -115,6 +120,11 @@ public class Turn
         return actionValue;
     }
 
+    /** An action to be performed based on a given character
+     *  representing an action
+     * 
+     * @param actionValue
+     */
     private void performAction(int actionValue)
     {
         // 'hit' adds card to user's hand
@@ -148,6 +158,7 @@ public class Turn
         }
     }
 
+    /** To be performed when person busts */
     private void bustProtocol()
     {
         // **Improve bust message
